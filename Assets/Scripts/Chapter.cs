@@ -20,7 +20,7 @@ public class Chapter
         get { return _id; }
     }
 
-    public string Name
+    public string Title
     {
         get { return _name; }
     }
@@ -44,5 +44,13 @@ public class Chapter
             return true;
         }
         return false;
+    }
+
+    public bool CompareChapter(Chapter chapter, int id, string title, ChapterType type)
+    {
+        if (chapter.ID == id && chapter.Title == title && chapter.Type.ToString() == type.ToString())
+            return true;
+        else
+            return false;
     }
 }

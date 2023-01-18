@@ -10,13 +10,12 @@ using UnityEngine.SceneManagement;
 /// TODO: Add further randomisation to how chapters are loaded (math should be defined in an external math class). 
 /// TODO: 
 /// </summary>
-
 public class Story
 {
     /// <summary>
     /// The list of available chapters within the story. 
     /// </summary>
-    private List<Chapter> _chapters = new List<Chapter>();
+    private List<Chapter> _chapters;
 
     /// <summary>
     /// The chapters that have been accessed/loaded by the player. 
@@ -69,6 +68,11 @@ public class Story
     /// <param name="chapters">The chapters that should be added to the story instance at runtime. </param>
     public Story(List<Chapter> chapters)
     {
+        if (chapters.Count <= 0 && chapters[0] != null)
+        {
+            throw new Exception("ERROR: No data in chapters list.");
+        }
+
         //Set chapters. 
         _chapters = chapters;
         SelectInitalChapter();
@@ -79,39 +83,34 @@ public class Story
     /// </summary>
     private void SelectInitalChapter()
     {
+        List<Chapter> startChapters = GetChapterByType(ChapterType.START);
+        int rand = N_Lin_Math.GetStartRand(startChapters);
         Chapter startSelection;
 
-        //Generate starting room. 
-        startSelection = RandomiseStartChapter();
+        //Set starting room. 
+        startSelection = startChapters[rand];
 #if DEBUG
-        Debug.Log(string.Format("Level: <name: {0}, ID: {1}, type: {2}>", _currentChapter.Name, _currentChapter.ID, _currentChapter.Type));
+        if (startSelection != null)
+            NLinSys_HelperFunctions.PrintChapter(startSelection);
 #endif
-        GoToChapterByIndex(startSelection.ID);
-    }
-
-    /// <summary>
-    /// Temp math process for inital room selection. 
-    /// </summary>
-    /// <returns> A semi-randomised inital room selection. </returns>
-    private Chapter RandomiseStartChapter()
-    {
-        List<Chapter> startChapters = GetChapterByType(ChapterType.START);
-        int randomRange = UnityEngine.Random.Range(0, startChapters.Count);
-        return startChapters[randomRange];
+        if (startSelection != null)
+            GoToChapterByIdentifier(startSelection.ID);
+        else
+            Debug.Log("No starting room found. ");
     }
 
     /// <summary>
     /// Shorthand function for loading the sequential chapter. 
     /// TODO: Replace with randomisation/allignment values.
     /// </summary>
-    public void GoToNextChapter() => GoToChapterByIndex(_currentChapter.ID + 1);
+    public void GoToNextChapter() => GoToChapterByIdentifier(_currentChapter.ID + 1);
 
     /// <summary>
     /// Allows for a level to be loaded based on index. 
     /// TODO: Replace with randomisation/allignment values. 
     /// </summary>
     /// <param name="index"> The index of the level to be loaded. </param>
-    public void GoToChapterByIndex(int index)
+    public void GoToChapterByIdentifier(int index)
     {
         Chapter chapter = GetChapter(index);
 
@@ -123,6 +122,26 @@ public class Story
         else
         {
             Debug.LogError(string.Format("Chapter does not exist with index {0}. Chapter load failed.", index));
+        }
+    }
+
+    /// <summary>
+    /// Allows for a level to be loaded based on string identifier. 
+    /// TODO: Replace with randomisation/allignment values. 
+    /// </summary>
+    /// <param name="title"> The string identifier of the level to be loaded. </param>
+    public void GoToChapterByIdentifier(string title)
+    {
+        Chapter chapter = GetChapter(title);
+
+        if (chapter != null)
+        {
+            _currentChapter = chapter;
+            _playedChapters.Add(chapter);
+        }
+        else
+        {
+            Debug.LogError(string.Format("Chapter does not exist with title {0}. Chapter load failed.", title));
         }
     }
 
@@ -144,6 +163,29 @@ public class Story
         return null;
     }
 
+    /// <summary>
+    /// Retrive a specific chapter based on its ID. 
+    /// </summary>
+    /// <param name="chapterStringID"> The string ID of the chapter to be retrived. </param>
+    /// <returns> The requested chapter/NULL if not found. </returns>
+    private Chapter GetChapter(string chapterStringID)
+    {
+        foreach (Chapter chapter in _chapters)
+        {
+            if (chapter.Title == chapterStringID)
+            {
+                return chapter;
+            }
+        }
+
+        return null;
+    }
+
+    /// <summary>
+    /// Get a selection of chapters based on their type. 
+    /// </summary>
+    /// <param name="type"> The ChapterType to match against. </param>
+    /// <returns> List<Chapters> matching the passed parameter. </Chapters></returns>
     private List<Chapter> GetChapterByType(ChapterType type)
     {
         List<Chapter> matched = new List<Chapter>();

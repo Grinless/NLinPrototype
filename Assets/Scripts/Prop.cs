@@ -2,17 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Prop : MonoBehaviour
+public interface IInteractable
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    void InitaliseInteraction(); 
+}
 
-    // Update is called once per frame
-    void Update()
+//Prop
+//--
+//--
+//Responsibilities
+//-- Handles interaction.
+//-- Contains an alignment effect.  
+
+public class Prop : IInteractable
+{
+    [SerializeField] private PropData _data = new PropData();
+
+    void IInteractable.InitaliseInteraction()
     {
-        
+        throw new System.NotImplementedException();
     }
+}
+
+//PropData
+//--
+//--
+//Responsibilities
+//-- Contains stats affected by this prop. 
+//-- Contains a string of dialogue to be shown. 
+
+public class PropData
+{
+    private List<AlignmentType> _alignmentTypes = new List<AlignmentType>();
 }
