@@ -96,13 +96,6 @@
           <thresholdMin>0</thresholdMin>
           <thresholdMax>0</thresholdMax>
         </XML_RoomAlignment>
-        <XML_RoomAlignment>
-          <identifier>6</identifier>
-          <matchMin>0</matchMin>
-          <matchMax>0</matchMax>
-          <thresholdMin>0</thresholdMin>
-          <thresholdMax>0</thresholdMax>
-        </XML_RoomAlignment>
       </roomAlignments>
       <type>START_NODE</type>
     </XML_RoomData>

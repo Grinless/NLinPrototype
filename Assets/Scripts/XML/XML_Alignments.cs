@@ -30,10 +30,11 @@ public class XML_AlignmentsTree
     #region Data Editing. 
     public void AddAlignment() =>
     alignments.Add(
-        new XML_Alignments() { 
-            name = "New Alignment", 
-            identifier = GetNextIdentifier(), 
-            initalValue = 0 
+        new XML_Alignments()
+        {
+            name = "New Alignment",
+            identifier = GetNextIdentifier(),
+            initalValue = 0
         });
 
     private int GetNextIdentifier()
@@ -51,12 +52,12 @@ public class XML_AlignmentsTree
 
 public enum RoomTypeEnum
 {
-    START_NODE, 
-    PASSAGE_NODE, 
+    START_NODE,
+    PASSAGE_NODE,
     ENDING_NODE
 }
 
-[XmlRoot(ElementName ="RoomData")]
+[XmlRoot(ElementName = "RoomData")]
 public class XML_RoomTree
 {
     [XmlArray(ElementName = "Rooms")]
@@ -95,7 +96,7 @@ public class XML_RoomData
     [XmlElement(ElementName = "identifier")]
     public int identifier;
     [XmlArray(ElementName = "roomAlignments")]
-    public List<XML_RoomAlignment> roomAlignments = new List<XML_RoomAlignment>(); 
+    public List<XML_RoomAlignment> roomAlignments = new List<XML_RoomAlignment>();
     [XmlElement(ElementName = "type")]
     public RoomTypeEnum roomType = RoomTypeEnum.START_NODE;
 
@@ -103,8 +104,10 @@ public class XML_RoomData
     public void AddAlignment()
     {
         roomAlignments.Add(
-            new XML_RoomAlignment() { 
-                identifier = GetNextIdentifier() }
+            new XML_RoomAlignment()
+            {
+                identifier = GetNextIdentifier()
+            }
             );
     }
 
@@ -137,21 +140,32 @@ public class XML_RoomData
                 break;
         }
     }
+
+    public void RemoveAlignments(List<XML_RoomAlignment> alignments)
+    {
+        lock (alignments)
+        {
+            foreach (XML_RoomAlignment item in alignments)
+            {
+                roomAlignments.Remove(item);
+            }
+        }
+    }
     #endregion
 }
 
 [System.Serializable]
 public class XML_RoomAlignment
 {
-    [XmlElement(ElementName ="identifier")]
+    [XmlElement(ElementName = "identifier")]
     public int identifier;
-    [XmlElement(ElementName ="matchMin")]
-    public float matchMin; 
-    [XmlElement(ElementName ="matchMax")]
+    [XmlElement(ElementName = "matchMin")]
+    public float matchMin;
+    [XmlElement(ElementName = "matchMax")]
     public float matchMax;
-    [XmlElement(ElementName ="thresholdMin")]
+    [XmlElement(ElementName = "thresholdMin")]
     public float thresholdMin;
-    [XmlElement(ElementName ="thresholdMax")]
+    [XmlElement(ElementName = "thresholdMax")]
     public float thresholdMax;
 }
 
@@ -164,7 +178,7 @@ public static class XMLFileNames
 public static class XMLSerialization
 {
     private static string folder = "/Alignments";
-    
+
     private static string DirPath
     {
         get { return Application.dataPath + folder; }

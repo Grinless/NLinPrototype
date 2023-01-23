@@ -186,25 +186,25 @@ public class NLin_RoomEditorWindow : EditorWindow
         DrawAndResolveRoomToolbar(ref data);
     }
 
+    /// <summary>
+    /// Draws the room alignment header information. 
+    /// </summary>
     private void DrawRoomAlignmentsHeader()
     {
         //Draw Label Row 1 
         GUILayout.BeginHorizontal();
         GUILayout.Label("Alignments: ", GUILayout.Width(100));
-        GUILayout.Space(120);
-        GUILayout.Label(" | Match Range: ");
-        GUILayout.Space(20);
+        GUILayout.Space(100);
+        GUILayout.Label(" | Match Range: ", GUILayout.Width(150));
         GUILayout.Label(" | Threshold Range: ");
         GUILayout.EndHorizontal();
 
         //Draw second
         GUILayout.BeginHorizontal();
-        GUILayout.Space(260);
-        GUILayout.Label("Min", GUILayout.Width(75));
-        GUILayout.Space(2);
-        GUILayout.Label("Max");
-        GUILayout.Space(40);
-        GUILayout.Label("Min", GUILayout.Width(80));
+        GUILayout.Space(230);
+        GUILayout.Label("Min", GUILayout.Width(55));
+        GUILayout.Label("Max", GUILayout.Width(90));
+        GUILayout.Label("Min", GUILayout.Width(50));
         GUILayout.Space(5);
         GUILayout.Label("Max");
         GUILayout.EndHorizontal();
@@ -223,32 +223,44 @@ public class NLin_RoomEditorWindow : EditorWindow
     private void DrawAlignments(ref XML_RoomData data)
     {
         XML_RoomAlignment alignment;
+        List<XML_RoomAlignment> alignmentsToRemove = new List<XML_RoomAlignment>();
         GUILayout.BeginVertical();
         foreach (XML_RoomAlignment roomAlignment in data.roomAlignments)
         {
             alignment = roomAlignment;
-            DrawAlignment(ref alignment);
+            bool remove; 
+            DrawAlignment(ref alignment, out remove);
+            if (remove)
+            {
+                alignmentsToRemove.Add(alignment);
+            }
         }
         GUILayout.EndVertical();
+
+        data.RemoveAlignments(alignmentsToRemove);
     }
 
     /// <summary>
     /// Draw the room alignment. 
     /// </summary>
     /// <param name="data"> The XML_RoomAlignment reference to draw. </param>
-    private void DrawAlignment(ref XML_RoomAlignment alignment)
+    private void DrawAlignment(ref XML_RoomAlignment alignment, out bool removeAlignment)
     {
+
         GUILayout.BeginHorizontal();
         //Draw Alignment Name and Identifier.
         NLin_HelperFunctions.DrawID(alignment.identifier, 40);
         alignment.identifier = EditorGUILayout.Popup("", alignment.identifier, alignmentOptions.ToArray(), GUILayout.Width(100));
-        GUILayout.Space(80);
-        //Draw Alignment Match threshold.
-        alignment.matchMin = EditorGUILayout.FloatField(alignment.matchMin, GUILayout.Width(80));
-        alignment.matchMax = EditorGUILayout.FloatField(alignment.matchMax, GUILayout.Width(80));
-        GUILayout.Space(80);
-        alignment.thresholdMin = EditorGUILayout.FloatField(alignment.thresholdMin, GUILayout.Width(80));
-        alignment.thresholdMax = EditorGUILayout.FloatField(alignment.thresholdMax, GUILayout.Width(80));
+        GUILayout.Space(60);
+        //Draw Alignment Match Values.
+        alignment.matchMin = EditorGUILayout.FloatField(alignment.matchMin, GUILayout.Width(60));
+        alignment.matchMax = EditorGUILayout.FloatField(alignment.matchMax, GUILayout.Width(60));
+        GUILayout.Space(30);
+        //Draw Alignment Threshold Values.
+        alignment.thresholdMin = EditorGUILayout.FloatField(alignment.thresholdMin, GUILayout.Width(60));
+        alignment.thresholdMax = EditorGUILayout.FloatField(alignment.thresholdMax, GUILayout.Width(60));
+        GUILayout.Space(40);
+        removeAlignment = GUILayout.Button("Remove Alignment", GUILayout.Width(120)); 
         GUILayout.EndHorizontal();
     }
 
