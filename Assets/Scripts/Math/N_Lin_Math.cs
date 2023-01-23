@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 public static class N_Lin_Math
 {
-
     public static int GetStartRand(List<Chapter> chapters)
     {
         if (CanStartRand(chapters))

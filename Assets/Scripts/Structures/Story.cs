@@ -44,6 +44,23 @@ public class Story
     }
 
     /// <summary>
+    /// CTOR: 
+    /// INIT the story class, and set inital conditionals. 
+    /// </summary>
+    /// <param name="chapters">The chapters that should be added to the story instance at runtime. </param>
+    public Story(List<Chapter> chapters)
+    {
+        if (chapters.Count <= 0 && chapters[0] != null)
+        {
+            throw new Exception("ERROR: No data in chapters list.");
+        }
+
+        //Set chapters. 
+        _chapters = chapters;
+        SelectInitalChapter();
+    }
+
+    /// <summary>
     /// Add a chapter to the current chapters held within the narrative. 
     /// </summary>
     /// <param name="chapter"> The chapter to add. </param>
@@ -62,23 +79,6 @@ public class Story
     }
 
     /// <summary>
-    /// CTOR: 
-    /// INIT the story class, and set inital conditionals. 
-    /// </summary>
-    /// <param name="chapters">The chapters that should be added to the story instance at runtime. </param>
-    public Story(List<Chapter> chapters)
-    {
-        if (chapters.Count <= 0 && chapters[0] != null)
-        {
-            throw new Exception("ERROR: No data in chapters list.");
-        }
-
-        //Set chapters. 
-        _chapters = chapters;
-        SelectInitalChapter();
-    }
-
-    /// <summary>
     /// Select the inital chapter for the story. 
     /// </summary>
     private void SelectInitalChapter()
@@ -91,7 +91,7 @@ public class Story
         startSelection = startChapters[rand];
 #if DEBUG
         if (startSelection != null)
-            NLinSys_HelperFunctions.PrintChapter(startSelection);
+            NLin_HelperFunctions.PrintChapter(startSelection);
 #endif
         if (startSelection != null)
             GoToChapterByIdentifier(startSelection.ID);
@@ -148,8 +148,8 @@ public class Story
     /// <summary>
     /// Retrive a specific chapter based on its ID. 
     /// </summary>
-    /// <param name="chapterID"> The ID of the chapter to be retrived. </param>
-    /// <returns> The requested chapter/NULL if not found. </returns>
+    /// <param name="chapterID">The ID of the chapter to be retrived</param>
+    /// <returns>The requested chapter/NULL if not found.</returns>
     private Chapter GetChapter(int chapterID)
     {
         foreach (Chapter chapter in _chapters)

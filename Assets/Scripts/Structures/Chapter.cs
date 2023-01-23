@@ -30,10 +30,10 @@ public class Chapter
         get { return _type.ToString(); }
     }
 
-    public Chapter(int ID, string name, ChapterType type)
+    public Chapter(int id, string title, ChapterType type)
     {
-        _id = ID;
-        _name = name; 
+        _id = id;
+        _name = title; 
         _type = type;
     }
 
