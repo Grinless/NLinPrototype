@@ -17,7 +17,7 @@ public class NLin_AlignmentsWindow : EditorWindow
     Texture2D displayTexture;
 
     XML_AlignmentsTree tree = new XML_AlignmentsTree();
-    public static XML_Alignments selected;
+    public static XML_Alignment selected;
 
     [MenuItem("NLin/Alignments/AlignmentEditor")]
     public static void ShowExample()
@@ -97,18 +97,26 @@ public class NLin_AlignmentsWindow : EditorWindow
 
     private void DrawAlignmentDisplay()
     {
-        XML_Alignments alignment;
+        bool remove;
+        XML_Alignment alignment;
+        List<XML_Alignment> alignmentsToRemove = new List<XML_Alignment>();
         GUILayout.BeginArea(displaySectionRect);
         GUILayout.BeginVertical();
+        DrawAlignmentHeader();
         NLin_HelperFunctions.DrawUILine(Color.black);
-        foreach (XML_Alignments alignments in tree.alignments)
+        foreach (XML_Alignment alignments in tree.alignments)
         {
             alignment = alignments;
-            DrawAlignment(ref alignment);
+            DrawAlignment(ref alignment, out remove);
             NLin_HelperFunctions.DrawUILine(Color.black);
+            if (remove)
+            {
+                alignmentsToRemove.Add(alignment);
+            }
         }
         GUILayout.EndVertical();
         GUILayout.EndArea();
+        tree.RemoveAlignments(alignmentsToRemove);
     }
     #endregion
 
@@ -117,74 +125,56 @@ public class NLin_AlignmentsWindow : EditorWindow
     public void NewData()
     {
         tree = new XML_AlignmentsTree();
-        tree.alignments.Add(new XML_Alignments() { name = "New Alignment", identifier = 0, initalValue = 0 });
+        tree.alignments.Add(new XML_Alignment() { name = "New Alignment", identifier = 0, initalValue = 0 });
     }
 
     public void LoadData()
     {
         Debug.Log("Loading Data");
-        tree = XMLSerialization.Deserialize<XML_AlignmentsTree>(XMLFileNames.atfilename);
+        tree = NLin_XMLSerialization.Deserialize<XML_AlignmentsTree>(XMLFileNames.alignmentTreeFilename);
     }
 
     public void SaveData()
     {
         Debug.Log("Data saving requested, Saving data.");
-        XMLSerialization.Serialize<XML_AlignmentsTree>(tree, XMLFileNames.atfilename);
+        NLin_XMLSerialization.Serialize<XML_AlignmentsTree>(tree, XMLFileNames.alignmentTreeFilename);
     }
 
     #endregion
 
     #region Draw Elements. 
 
-    public void DrawAlignment(ref XML_Alignments alignment)
+    private void DrawAlignmentHeader()
+    {
+        GUILayout.BeginHorizontal();
+        GUILayout.Label("Alignment Name (ID)", GUILayout.Width(150)); 
+        GUILayout.Label("Player Starting Value", GUILayout.Width(150));
+        GUILayout.Space(15);
+        GUILayout.Label("Range:", GUILayout.Width(60));
+        GUILayout.EndHorizontal();
+        GUILayout.BeginHorizontal();
+        GUILayout.Space(310);
+        GUILayout.Label("Min", GUILayout.Width(50));
+        GUILayout.Label("Max");
+        GUILayout.EndHorizontal();
+    }
+
+    public void DrawAlignment(ref XML_Alignment alignment, out bool remove)
     {
         GUILayout.BeginHorizontal();
         //Draw Alignment Name and Identifier. 
-        GUILayout.Label(alignment.name + " (ID: " + alignment.identifier + "): ", GUILayout.Width(150));
+        alignment.name = GUILayout.TextField(alignment.name, GUILayout.Width(100));
+        GUILayout.Label(" (ID: " + alignment.identifier + ")", GUILayout.Width(50));
 
         //Draw Alignment Value. 
-        GUILayout.Label("Starting Value (Player):", GUILayout.Width(150));
+        GUILayout.Space(30);
         alignment.initalValue = EditorGUILayout.FloatField(alignment.initalValue, GUILayout.Width(50));
-        GUILayout.Space(50);
-        bool edit = GUILayout.Button("Edit alignment", GUILayout.Width(100));
+        GUILayout.Space(60);
+        alignment.valueMinimumCap = EditorGUILayout.FloatField(alignment.valueMinimumCap, GUILayout.Width(50));
+        alignment.valueMaximumCap = EditorGUILayout.FloatField(alignment.valueMaximumCap, GUILayout.Width(50));
+        GUILayout.Space(60);
+        remove = GUILayout.Button("Remove alignment", GUILayout.Width(120));
         GUILayout.EndHorizontal();
-
-        if (edit)
-        {
-            //Launch new editor. 
-            Debug.Log("Edit data");
-            selected = alignment;
-            NLin_AlignmentEditor.CreateWizard();
-
-        }
     }
     #endregion
-}
-
-/// <summary>
-/// ScriptableWizard used to further edit a specified alignment value. 
-/// </summary>
-public class NLin_AlignmentEditor : ScriptableWizard
-{
-    public string a_title = NLin_AlignmentsWindow.selected.name;
-    public float a_initalValue = NLin_AlignmentsWindow.selected.initalValue;
-    public float a_minRange = NLin_AlignmentsWindow.selected.valueMinimumCap;
-    public float a_maxRange = NLin_AlignmentsWindow.selected.valueMaximumCap;
-
-    public static void CreateWizard()
-    {
-        //Generate the new wizard. 
-        ScriptableWizard.DisplayWizard<NLin_AlignmentEditor>("Alignment Editor", "Update", "Cancel");
-    }
-
-    private void OnWizardCreate()
-    {
-        //On create set all values to the inital alignment class. 
-        NLin_AlignmentsWindow.selected.name = a_title;
-        NLin_AlignmentsWindow.selected.initalValue = a_initalValue;
-        NLin_AlignmentsWindow.selected.valueMinimumCap = a_minRange;
-        NLin_AlignmentsWindow.selected.valueMaximumCap = a_maxRange;
-    }
-
-    private void OnWizardOtherButton() => this.Close(); //If Closed button pressed, changes should be ignored.
 }

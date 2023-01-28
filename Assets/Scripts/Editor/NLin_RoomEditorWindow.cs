@@ -12,7 +12,7 @@ public class NLin_RoomEditorWindow : EditorWindow
     string[] alignmentOptions;
     string[] roomTypeOptions;
     bool newTree, loadTree, saveTree, addRoom;
-    public static XML_RoomData selectedForEdit;
+    public static XML_Room selectedForEdit;
 
     [MenuItem("NLin/Rooms/Room Editor")]
     public static void ShowEditor()
@@ -45,7 +45,7 @@ public class NLin_RoomEditorWindow : EditorWindow
     #region Data Loading. 
     private void LoadAlignments()
     {
-        aTree = XMLSerialization.Deserialize<XML_AlignmentsTree>(XMLFileNames.atfilename);
+        aTree = NLin_XMLSerialization.Deserialize<XML_AlignmentsTree>(XMLFileNames.alignmentTreeFilename);
         List<string> temp = new List<string>();
         //Deserialize Alignment Types. 
         for (int i = 0; i < aTree.alignments.Count; i++)
@@ -85,7 +85,7 @@ public class NLin_RoomEditorWindow : EditorWindow
 
     private void GUIDraw()
     {
-        XML_RoomData dataSel; //Reference container. 
+        XML_Room dataSel; //Reference container. 
 
         //Draw the toolbar and handle results. 
         ToolbarDrawAndResolve();
@@ -95,7 +95,7 @@ public class NLin_RoomEditorWindow : EditorWindow
             return;
 
         //Else draw rooms. 
-        foreach (XML_RoomData item in rTree.rooms)
+        foreach (XML_Room item in rTree.rooms)
         {
             dataSel = item;
             DrawRoom(ref dataSel);
@@ -124,10 +124,10 @@ public class NLin_RoomEditorWindow : EditorWindow
         }
 
         if (loadTree)
-            rTree = XMLSerialization.Deserialize<XML_RoomTree>(XMLFileNames.rtfilename);
+            rTree = NLin_XMLSerialization.Deserialize<XML_RoomTree>(XMLFileNames.roomTreeFilename);
 
         if (saveTree)
-            XMLSerialization.Serialize<XML_RoomTree>(rTree, XMLFileNames.rtfilename);
+            NLin_XMLSerialization.Serialize<XML_RoomTree>(rTree, XMLFileNames.roomTreeFilename);
 
         if (addRoom)
             AddRoom();
@@ -137,7 +137,7 @@ public class NLin_RoomEditorWindow : EditorWindow
 
     #region Room Toolbar.
     
-    private void DrawAndResolveRoomToolbar(ref XML_RoomData data)
+    private void DrawAndResolveRoomToolbar(ref XML_Room data)
     {
         GUILayout.BeginHorizontal();
         bool editRoom = GUILayout.Button("Edit Room.", new GUILayoutOption[] { GUILayout.Width(80) });
@@ -169,7 +169,7 @@ public class NLin_RoomEditorWindow : EditorWindow
     #endregion
 
     #region Draw Rooms
-    private void DrawRoom(ref XML_RoomData data)
+    private void DrawRoom(ref XML_Room data)
     {
         //int selected = 0;
         EditorGUILayout.Separator();
@@ -220,7 +220,7 @@ public class NLin_RoomEditorWindow : EditorWindow
     /// Draw the list of alignments within a room. 
     /// </summary>
     /// <param name="data">The XML RoomData</param>
-    private void DrawAlignments(ref XML_RoomData data)
+    private void DrawAlignments(ref XML_Room data)
     {
         XML_RoomAlignment alignment;
         List<XML_RoomAlignment> alignmentsToRemove = new List<XML_RoomAlignment>();

@@ -65,7 +65,6 @@
     <Compile Include="Assets\Scripts\Objects\Prop.cs" />
     <Compile Include="Assets\Scripts\Editor\NLin_AlignmentsWindow.cs" />
     <Compile Include="Assets\Scripts\Helpers\NLin_HelperFunctions.cs" />
-    <Compile Include="Assets\Scripts\XML\XML_Alignments.cs" />
     <Compile Include="Assets\Scripts\Math\N_Lin_Math.cs" />
     <Compile Include="Assets\Scripts\Structures\Biome.cs" />
     <Compile Include="Assets\Scripts\Alignment\AlignmentData.cs" />
@@ -74,7 +73,10 @@
     <Compile Include="Assets\Scripts\Alignment\PlayerAlignment.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\AlignmentScriptableObject.cs" />
     <Compile Include="Assets\Scripts\Alignment\RoomAlignments.cs" />
+    <Compile Include="Assets\Scripts\Editor\NLin_EditorHelper.cs" />
     <Compile Include="Assets\Scripts\Alignment\AlignmentType.cs" />
+    <Compile Include="Assets\Scripts\XML\NLin_XMLSerialization.cs" />
+    <Compile Include="Assets\Scripts\XML\XML_Alignment.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\Scripts.asmdef" />
