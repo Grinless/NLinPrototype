@@ -2,36 +2,29 @@
 <AlignmentTree xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Alignments>
     <XML_Alignment>
-      <name>Hope</name>
+      <name>happiness</name>
       <identifier>0</identifier>
       <initalValue>0</initalValue>
       <minimumCap>-1</minimumCap>
       <maximumCap>1</maximumCap>
     </XML_Alignment>
     <XML_Alignment>
-      <name>Passivity</name>
+      <name>anger</name>
       <identifier>1</identifier>
       <initalValue>0</initalValue>
-      <minimumCap>-5</minimumCap>
-      <maximumCap>5</maximumCap>
+      <minimumCap>-1</minimumCap>
+      <maximumCap>1</maximumCap>
     </XML_Alignment>
     <XML_Alignment>
-      <name>Some shit</name>
+      <name>greed</name>
       <identifier>2</identifier>
       <initalValue>0</initalValue>
-      <minimumCap>0</minimumCap>
-      <maximumCap>0</maximumCap>
+      <minimumCap>-1</minimumCap>
+      <maximumCap>1</maximumCap>
     </XML_Alignment>
     <XML_Alignment>
-      <name>Some Other</name>
+      <name>lust</name>
       <identifier>3</identifier>
-      <initalValue>0</initalValue>
-      <minimumCap>0</minimumCap>
-      <maximumCap>0</maximumCap>
-    </XML_Alignment>
-    <XML_Alignment>
-      <name>Yet Another</name>
-      <identifier>4</identifier>
       <initalValue>0</initalValue>
       <minimumCap>0</minimumCap>
       <maximumCap>0</maximumCap>

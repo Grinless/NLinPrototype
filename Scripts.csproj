@@ -72,6 +72,7 @@
     <Compile Include="Assets\Scripts\Editor\NLin_RoomEditorWindow.cs" />
     <Compile Include="Assets\Scripts\Alignment\PlayerAlignment.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\AlignmentScriptableObject.cs" />
+    <Compile Include="Assets\Scripts\Editor\EditorGUIDrawer_Alignment.cs" />
     <Compile Include="Assets\Scripts\Alignment\RoomAlignments.cs" />
     <Compile Include="Assets\Scripts\Editor\NLin_EditorHelper.cs" />
     <Compile Include="Assets\Scripts\Alignment\AlignmentType.cs" />

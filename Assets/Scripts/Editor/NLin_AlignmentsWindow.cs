@@ -28,6 +28,7 @@ public class NLin_AlignmentsWindow : EditorWindow
 
     public void OnEnable()
     {
+        tree = NLin_EditorHelper.AlignmentsTree;
         InitTextures();
     }
 
@@ -107,7 +108,7 @@ public class NLin_AlignmentsWindow : EditorWindow
         foreach (XML_Alignment alignments in tree.alignments)
         {
             alignment = alignments;
-            DrawAlignment(ref alignment, out remove);
+            EditorGUIDrawer_Alignment.Draw(ref alignment, out remove);
             NLin_HelperFunctions.DrawUILine(Color.black);
             if (remove)
             {
@@ -122,11 +123,7 @@ public class NLin_AlignmentsWindow : EditorWindow
 
     #region Data Handling
 
-    public void NewData()
-    {
-        tree = new XML_AlignmentsTree();
-        tree.alignments.Add(new XML_Alignment() { name = "New Alignment", identifier = 0, initalValue = 0 });
-    }
+    public void NewData() => tree = NLin_EditorHelper.NewAlignmentTree();
 
     public void LoadData()
     {
@@ -134,11 +131,7 @@ public class NLin_AlignmentsWindow : EditorWindow
         tree = NLin_XMLSerialization.Deserialize<XML_AlignmentsTree>(XMLFileNames.alignmentTreeFilename);
     }
 
-    public void SaveData()
-    {
-        Debug.Log("Data saving requested, Saving data.");
-        NLin_XMLSerialization.Serialize<XML_AlignmentsTree>(tree, XMLFileNames.alignmentTreeFilename);
-    }
+    public void SaveData() => NLin_EditorHelper.SaveAlignmentTree();
 
     #endregion
 
@@ -156,24 +149,6 @@ public class NLin_AlignmentsWindow : EditorWindow
         GUILayout.Space(310);
         GUILayout.Label("Min", GUILayout.Width(50));
         GUILayout.Label("Max");
-        GUILayout.EndHorizontal();
-    }
-
-    public void DrawAlignment(ref XML_Alignment alignment, out bool remove)
-    {
-        GUILayout.BeginHorizontal();
-        //Draw Alignment Name and Identifier. 
-        alignment.name = GUILayout.TextField(alignment.name, GUILayout.Width(100));
-        GUILayout.Label(" (ID: " + alignment.identifier + ")", GUILayout.Width(50));
-
-        //Draw Alignment Value. 
-        GUILayout.Space(30);
-        alignment.initalValue = EditorGUILayout.FloatField(alignment.initalValue, GUILayout.Width(50));
-        GUILayout.Space(60);
-        alignment.valueMinimumCap = EditorGUILayout.FloatField(alignment.valueMinimumCap, GUILayout.Width(50));
-        alignment.valueMaximumCap = EditorGUILayout.FloatField(alignment.valueMaximumCap, GUILayout.Width(50));
-        GUILayout.Space(60);
-        remove = GUILayout.Button("Remove alignment", GUILayout.Width(120));
         GUILayout.EndHorizontal();
     }
     #endregion

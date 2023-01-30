@@ -25,13 +25,16 @@ public class NLin_RoomEditorWindow : EditorWindow
 
     private void OnEnable()
     {
-        if (aTree == null)
-        {
-            LoadAlignments();
-        }
-        LoadRoomTypes();
+        alignmentOptions = NLin_EditorHelper.CurrentAlignments;
+        roomTypeOptions = NLin_EditorHelper.CurrentRoomTypes;
+
+        NLin_EditorHelper.AlignmentsChanged += OnAlignmentChange; 
     }
 
+    private void OnDisable()
+    {
+        NLin_EditorHelper.AlignmentsChanged -= OnAlignmentChange;
+    }
 
     private void OnGUI()
     {
@@ -42,25 +45,12 @@ public class NLin_RoomEditorWindow : EditorWindow
 
     #endregion
 
-    #region Data Loading. 
-    private void LoadAlignments()
+    private void OnAlignmentChange()
     {
-        aTree = NLin_XMLSerialization.Deserialize<XML_AlignmentsTree>(XMLFileNames.alignmentTreeFilename);
-        List<string> temp = new List<string>();
-        //Deserialize Alignment Types. 
-        for (int i = 0; i < aTree.alignments.Count; i++)
-        {
-            temp.Add(aTree.alignments[i].name);
-        }
-        alignmentOptions = temp.ToArray();
+        //Get the new data into the editor. 
+        alignmentOptions = NLin_EditorHelper.CurrentAlignments;
+        roomTypeOptions = NLin_EditorHelper.CurrentRoomTypes;
     }
-
-    private void LoadRoomTypes()
-    {
-        //Get room types as an array. 
-        roomTypeOptions = Enum.GetNames(typeof(RoomTypeEnum));
-    }
-    #endregion
 
     #region Utility Checks. 
 
@@ -136,7 +126,7 @@ public class NLin_RoomEditorWindow : EditorWindow
     #endregion
 
     #region Room Toolbar.
-    
+
     private void DrawAndResolveRoomToolbar(ref XML_Room data)
     {
         GUILayout.BeginHorizontal();
@@ -228,51 +218,30 @@ public class NLin_RoomEditorWindow : EditorWindow
         foreach (XML_RoomAlignment roomAlignment in data.roomAlignments)
         {
             alignment = roomAlignment;
-            bool remove; 
-            DrawAlignment(ref alignment, out remove);
+            bool remove;
+            EditorGUIDrawer_Alignment.Draw(ref alignment, alignmentOptions, out remove);
             if (remove)
-            {
                 alignmentsToRemove.Add(alignment);
-            }
         }
         GUILayout.EndVertical();
 
         data.RemoveAlignments(alignmentsToRemove);
     }
 
-    /// <summary>
-    /// Draw the room alignment. 
-    /// </summary>
-    /// <param name="data"> The XML_RoomAlignment reference to draw. </param>
-    private void DrawAlignment(ref XML_RoomAlignment alignment, out bool removeAlignment)
-    {
-
-        GUILayout.BeginHorizontal();
-        //Draw Alignment Name and Identifier.
-        NLin_HelperFunctions.DrawID(alignment.identifier, 40);
-        alignment.identifier = EditorGUILayout.Popup("", alignment.identifier, alignmentOptions.ToArray(), GUILayout.Width(100));
-        GUILayout.Space(60);
-        //Draw Alignment Match Values.
-        alignment.matchMin = EditorGUILayout.FloatField(alignment.matchMin, GUILayout.Width(60));
-        alignment.matchMax = EditorGUILayout.FloatField(alignment.matchMax, GUILayout.Width(60));
-        GUILayout.Space(30);
-        //Draw Alignment Threshold Values.
-        alignment.thresholdMin = EditorGUILayout.FloatField(alignment.thresholdMin, GUILayout.Width(60));
-        alignment.thresholdMax = EditorGUILayout.FloatField(alignment.thresholdMax, GUILayout.Width(60));
-        GUILayout.Space(40);
-        removeAlignment = GUILayout.Button("Remove Alignment", GUILayout.Width(120)); 
-        GUILayout.EndHorizontal();
-    }
-
     #endregion
     #endregion
+}
+
+public static class DrawRoom
+{
+
 }
 
 public class NLin_RoomEditor : ScriptableWizard
 {
     public string roomName = NLin_RoomEditorWindow.selectedForEdit.name;
     public RoomTypeEnum roomType = NLin_RoomEditorWindow.selectedForEdit.roomType;
-    
+
     public static void CreateWizard()
     {
         //Generate new wizard. 
