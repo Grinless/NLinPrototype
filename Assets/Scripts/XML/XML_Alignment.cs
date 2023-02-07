@@ -12,89 +12,30 @@ public class XML_Alignment
     /// </summary>
     [XmlElement(ElementName = "name")]
     public string name;
-    
+
     /// <summary>
     /// 
     /// </summary>
     [XmlElement(ElementName = "identifier")]
     public int identifier;
-    
+
     /// <summary>
     /// 
     /// </summary>
     [XmlElement(ElementName = "initalValue")]
     public float initalValue;
-    
+
     /// <summary>
     /// 
     /// </summary>
     [XmlElement(ElementName = "minimumCap")]
     public float valueMinimumCap;
-    
+
     /// <summary>
     /// 
     /// </summary>
     [XmlElement(ElementName = "maximumCap")]
     public float valueMaximumCap;
-}
-
-/// <summary>
-/// Data class containing information on core alignment types. 
-/// </summary>
-[XmlRoot(ElementName = "AlignmentTree")]
-public class XML_AlignmentsTree
-{
-    /// <summary>
-    /// The list of serializable alignment types. 
-    /// </summary>
-    [XmlArray(ElementName = "Alignments")]
-    public List<XML_Alignment> alignments = new List<XML_Alignment>();
-
-    #region Data Editing. 
-
-    /// <summary>
-    /// Add an alignment to the tree. 
-    /// </summary>
-    public void AddAlignment() =>
-    alignments.Add(
-        new XML_Alignment()
-        {
-            name = "New Alignment",
-            identifier = GetNextIdentifier(),
-            initalValue = 0
-        });
-
-    /// <summary>
-    /// Get the next Identifier. 
-    /// </summary>
-    /// <returns> Returns the next identifier in the alignment tree.</returns>
-    private int GetNextIdentifier()
-    {
-        int lastID = -1; //This value should never be set, hence making it safe for comparison. 
-
-        //Iterate over existing entry identifiers and increment by 1. 
-        foreach (XML_Alignment item in alignments)
-            if (lastID < item.identifier)
-                lastID = item.identifier;
-        return lastID + 1;
-    }
-
-    /// <summary>
-    /// Remove a list of alignments from the tree. 
-    /// </summary>
-    /// <param name="alignments"> The list of alignments to remove.</param>
-    public void RemoveAlignments(List<XML_Alignment> alignments)
-    {
-        lock (this.alignments)
-        {
-            foreach (XML_Alignment item in alignments)
-            {
-                this.alignments.Remove(item);
-            }
-        }
-    }
-
-    #endregion
 }
 
 /// <summary>
@@ -120,7 +61,7 @@ public class XML_RoomTree
     public List<XML_Room> rooms = new List<XML_Room>();
 
     #region Data Editing.
-    
+
     /// <summary>
     /// Add a room to the room data tree. 
     /// </summary>
@@ -179,13 +120,22 @@ public class XML_Room
     [XmlElement(ElementName = "type")]
     public RoomTypeEnum roomType = RoomTypeEnum.START_NODE;
 
+    public bool AlignmentsMaxed => roomAlignments.Count > NLin_EditorHelper.AlignmentCap;
+
     #region Data Editing. 
 
     /// <summary>
     /// Add a new alignment to the room. 
     /// </summary>
-    public void AddAlignment() =>
-        roomAlignments.Add(new XML_RoomAlignment() { identifier = GetNextIdentifier() });
+    public void AddAlignment()
+    {
+        int nextID = GetNextIdentifier();
+
+        if (AlignmentsMaxed)
+            return;
+
+        roomAlignments.Add(new XML_RoomAlignment() { identifier = nextID });
+    }
 
     /// <summary>
     /// Get the next identifier associated with the room. 
@@ -201,6 +151,24 @@ public class XML_Room
                 lastID = item.identifier;
         return lastID + 1;
     }
+
+    public int GetMissingIdentifier()
+    {
+        for (int i = 0; i < roomAlignments.Count; i++)
+        {
+            if ((roomAlignments[i].identifier + 1) != roomAlignments[i].identifier)
+            {
+                return i + 1;
+            }
+        }
+
+        return -1;
+    }
+
+    public bool CheckMissingIdentifier() =>
+        (roomAlignments.Count < NLin_EditorHelper.AlignmentCap) ? true : false;
+
+
 
     /// <summary>
     /// Set a room type using a RoomType enum identifier integer.

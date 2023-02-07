@@ -8,7 +8,7 @@ using System.Linq;
 public class NLin_RoomEditorWindow : EditorWindow
 {
     XML_RoomTree rTree;
-    XML_AlignmentsTree aTree;
+    NLin_XML_AlignmentTree aTree;
     string[] alignmentOptions;
     string[] roomTypeOptions;
     bool newTree, loadTree, saveTree, addRoom;

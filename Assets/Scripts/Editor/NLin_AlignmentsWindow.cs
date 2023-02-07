@@ -16,11 +16,16 @@ public class NLin_AlignmentsWindow : EditorWindow
     Texture2D headerTexture;
     Texture2D displayTexture;
 
-    XML_AlignmentsTree tree = new XML_AlignmentsTree();
-    public static XML_Alignment selected;
+    NLin_XML_AlignmentTree Tree => NLin_EditorHelper.AlignmentsTree;
+    
+    public static XML_Alignment Selected
+    {
+        get { return NLin_EditorHelper.SelectedAlignment; }
+        set { NLin_EditorHelper.SelectedAlignment = value; }
+    }
 
     [MenuItem("NLin/Alignments/AlignmentEditor")]
-    public static void ShowExample()
+    public static void ShowWindow()
     {
         NLin_AlignmentsWindow wnd = GetWindow<NLin_AlignmentsWindow>();
         wnd.titleContent = new GUIContent("AlignmentsEditor");
@@ -28,7 +33,6 @@ public class NLin_AlignmentsWindow : EditorWindow
 
     public void OnEnable()
     {
-        tree = NLin_EditorHelper.AlignmentsTree;
         InitTextures();
     }
 
@@ -77,7 +81,7 @@ public class NLin_AlignmentsWindow : EditorWindow
             SaveData();
 
         if (addAlignment)
-            tree.AddAlignment();
+            NLin_EditorHelper.AddAlignment(); 
 
         if (loadData)
             LoadData();
@@ -105,7 +109,7 @@ public class NLin_AlignmentsWindow : EditorWindow
         GUILayout.BeginVertical();
         DrawAlignmentHeader();
         NLin_HelperFunctions.DrawUILine(Color.black);
-        foreach (XML_Alignment alignments in tree.alignments)
+        foreach (XML_Alignment alignments in Tree.alignments)
         {
             alignment = alignments;
             EditorGUIDrawer_Alignment.Draw(ref alignment, out remove);
@@ -117,23 +121,15 @@ public class NLin_AlignmentsWindow : EditorWindow
         }
         GUILayout.EndVertical();
         GUILayout.EndArea();
-        tree.RemoveAlignments(alignmentsToRemove);
+        Tree.RemoveAlignments(alignmentsToRemove);
     }
     #endregion
 
-    #region Data Handling
+    public void NewData() => NLin_EditorHelper.NewAlignmentTree();
 
-    public void NewData() => tree = NLin_EditorHelper.NewAlignmentTree();
-
-    public void LoadData()
-    {
-        Debug.Log("Loading Data");
-        tree = NLin_XMLSerialization.Deserialize<XML_AlignmentsTree>(XMLFileNames.alignmentTreeFilename);
-    }
+    public void LoadData() => NLin_XMLSerialization.Deserialize<NLin_XML_AlignmentTree>(XMLFileNames.alignmentTreeFilename);
 
     public void SaveData() => NLin_EditorHelper.SaveAlignmentTree();
-
-    #endregion
 
     #region Draw Elements. 
 

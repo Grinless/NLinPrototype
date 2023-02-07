@@ -10,23 +10,25 @@ using System.Threading.Tasks;
 /// </summary>
 public static class NLin_EditorHelper
 {
-    private static XML_AlignmentsTree _alignmentsTree = null;
+    private static NLin_XML_AlignmentTree _alignmentsTree = null;
     private static XML_RoomTree _roomTree = null;
-    private static XML_Alignment _selectedAlignment = null; 
+    private static XML_Alignment _selectedAlignment = null;
     private static XML_Room _selectedRoomData = null;
     private static List<string> _alignmentTypes = null;
     private static string[] _roomTypes = null;
 
-    public delegate void AlignmentsManagement(); 
+    public delegate void AlignmentsManagement();
     public static AlignmentsManagement AlignmentsChanged;
 
-    public static XML_AlignmentsTree AlignmentsTree
+    public static int AlignmentCap => CurrentAlignments.Length - 1;
+
+    public static NLin_XML_AlignmentTree AlignmentsTree
     {
         get
         {
-            if(_alignmentsTree == null)
+            if (_alignmentsTree == null)
             {
-                _alignmentsTree = NLin_XMLSerialization.Deserialize<XML_AlignmentsTree>(XMLFileNames.alignmentTreeFilename);
+                _alignmentsTree = NLin_XMLSerialization.Deserialize<NLin_XML_AlignmentTree>(XMLFileNames.alignmentTreeFilename);
             }
 
             return _alignmentsTree;
@@ -37,7 +39,7 @@ public static class NLin_EditorHelper
     {
         get
         {
-            if(_roomTree == null)
+            if (_roomTree == null)
             {
                 _roomTree = NLin_XMLSerialization.Deserialize<XML_RoomTree>(XMLFileNames.roomTreeFilename);
             }
@@ -50,12 +52,9 @@ public static class NLin_EditorHelper
     {
         get
         {
-            if(_alignmentTypes == null)
-            {
-                _alignmentTypes = LoadAlignments();
-            }
+            _alignmentTypes = LoadAlignments();
 
-            return _alignmentTypes.ToArray(); 
+            return _alignmentTypes.ToArray();
         }
     }
 
@@ -63,11 +62,7 @@ public static class NLin_EditorHelper
     {
         get
         {
-            if (_roomTypes == null)
-            {
-                _roomTypes = LoadRoomTypes();
-            }
-
+            _roomTypes = LoadRoomTypes();
             return _roomTypes;
         }
     }
@@ -84,17 +79,22 @@ public static class NLin_EditorHelper
         set { _selectedRoomData = value; }
     }
 
-    public static XML_AlignmentsTree NewAlignmentTree()
+    public static NLin_XML_AlignmentTree NewAlignmentTree()
     {
-        _alignmentsTree = new XML_AlignmentsTree();
+        _alignmentsTree = new NLin_XML_AlignmentTree();
         _alignmentsTree.AddAlignment();
         return _alignmentsTree;
     }
 
+    public static void AddAlignment()
+    {
+        _alignmentsTree.AddAlignment(); 
+    }
+
     public static void SaveAlignmentTree()
     {
-        NLin_XMLSerialization.Serialize<XML_AlignmentsTree>(_alignmentsTree, XMLFileNames.alignmentTreeFilename);
-        if(AlignmentsChanged != null)
+        NLin_XMLSerialization.Serialize<NLin_XML_AlignmentTree>(_alignmentsTree, XMLFileNames.alignmentTreeFilename);
+        if (AlignmentsChanged != null)
         {
             AlignmentsChanged();
         }
