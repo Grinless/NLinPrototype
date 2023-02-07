@@ -11,7 +11,7 @@ public class NLin_XML_AlignmentTree
     /// The list of serializable alignment types. 
     /// </summary>
     [XmlArray(ElementName = "Alignments")]
-    public List<XML_Alignment> alignments = new List<XML_Alignment>();
+    public List<NLin_XML_Alignment> alignments = new List<NLin_XML_Alignment>();
 
     #region Data Editing. 
 
@@ -22,7 +22,7 @@ public class NLin_XML_AlignmentTree
     {
         int nxtIndex = GetNextIdentifier();
 
-        alignments.Add(new XML_Alignment()
+        alignments.Add(new NLin_XML_Alignment()
         {
             name = "New Alignment",
             identifier = GetNextIdentifier(),
@@ -40,7 +40,7 @@ public class NLin_XML_AlignmentTree
         int lastID = -1; //This value should never be set, hence making it safe for comparison. 
 
         //Iterate over existing entry identifiers and increment by 1. 
-        foreach (XML_Alignment item in alignments)
+        foreach (NLin_XML_Alignment item in alignments)
             if (lastID < item.identifier)
                 lastID = item.identifier;
         return lastID + 1;
@@ -50,11 +50,11 @@ public class NLin_XML_AlignmentTree
     /// Remove a list of alignments from the tree. 
     /// </summary>
     /// <param name="alignments"> The list of alignments to remove.</param>
-    public void RemoveAlignments(List<XML_Alignment> alignments)
+    public void RemoveAlignments(List<NLin_XML_Alignment> alignments)
     {
         lock (this.alignments)
         {
-            foreach (XML_Alignment item in alignments)
+            foreach (NLin_XML_Alignment item in alignments)
             {
                 this.alignments.Remove(item);
             }

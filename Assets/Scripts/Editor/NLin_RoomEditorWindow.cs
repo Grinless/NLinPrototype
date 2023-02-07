@@ -7,12 +7,12 @@ using System.Linq;
 
 public class NLin_RoomEditorWindow : EditorWindow
 {
-    XML_RoomTree rTree;
+    NLin_XML_RoomTree rTree;
     NLin_XML_AlignmentTree aTree;
     string[] alignmentOptions;
     string[] roomTypeOptions;
     bool newTree, loadTree, saveTree, addRoom;
-    public static XML_Room selectedForEdit;
+    public static NLin_XML_Room selectedForEdit;
 
     [MenuItem("NLin/Rooms/Room Editor")]
     public static void ShowEditor()
@@ -75,7 +75,7 @@ public class NLin_RoomEditorWindow : EditorWindow
 
     private void GUIDraw()
     {
-        XML_Room dataSel; //Reference container. 
+        NLin_XML_Room dataSel; //Reference container. 
 
         //Draw the toolbar and handle results. 
         ToolbarDrawAndResolve();
@@ -85,7 +85,7 @@ public class NLin_RoomEditorWindow : EditorWindow
             return;
 
         //Else draw rooms. 
-        foreach (XML_Room item in rTree.rooms)
+        foreach (NLin_XML_Room item in rTree.rooms)
         {
             dataSel = item;
             DrawRoom(ref dataSel);
@@ -109,15 +109,15 @@ public class NLin_RoomEditorWindow : EditorWindow
     {
         if (newTree)
         {
-            rTree = new XML_RoomTree();
+            rTree = new NLin_XML_RoomTree();
             AddRoom();
         }
 
         if (loadTree)
-            rTree = NLin_XMLSerialization.Deserialize<XML_RoomTree>(XMLFileNames.roomTreeFilename);
+            rTree = NLin_XMLSerialization.Deserialize<NLin_XML_RoomTree>(XMLFileNames.roomTreeFilename);
 
         if (saveTree)
-            NLin_XMLSerialization.Serialize<XML_RoomTree>(rTree, XMLFileNames.roomTreeFilename);
+            NLin_XMLSerialization.Serialize<NLin_XML_RoomTree>(rTree, XMLFileNames.roomTreeFilename);
 
         if (addRoom)
             AddRoom();
@@ -127,7 +127,7 @@ public class NLin_RoomEditorWindow : EditorWindow
 
     #region Room Toolbar.
 
-    private void DrawAndResolveRoomToolbar(ref XML_Room data)
+    private void DrawAndResolveRoomToolbar(ref NLin_XML_Room data)
     {
         GUILayout.BeginHorizontal();
         bool editRoom = GUILayout.Button("Edit Room.", new GUILayoutOption[] { GUILayout.Width(80) });
@@ -139,7 +139,7 @@ public class NLin_RoomEditorWindow : EditorWindow
             selectedForEdit = data;
             if (data.roomAlignments == null)
             {
-                data.roomAlignments = new List<XML_RoomAlignment>();
+                data.roomAlignments = new List<NLin_XML_RoomAlignment>();
                 data.AddAlignment();
             }
 
@@ -150,7 +150,7 @@ public class NLin_RoomEditorWindow : EditorWindow
         {
             if (data.roomAlignments == null)
             {
-                data.roomAlignments = new List<XML_RoomAlignment>();
+                data.roomAlignments = new List<NLin_XML_RoomAlignment>();
             }
             data.AddAlignment();
         }
@@ -159,7 +159,7 @@ public class NLin_RoomEditorWindow : EditorWindow
     #endregion
 
     #region Draw Rooms
-    private void DrawRoom(ref XML_Room data)
+    private void DrawRoom(ref NLin_XML_Room data)
     {
         //int selected = 0;
         EditorGUILayout.Separator();
@@ -210,12 +210,12 @@ public class NLin_RoomEditorWindow : EditorWindow
     /// Draw the list of alignments within a room. 
     /// </summary>
     /// <param name="data">The XML RoomData</param>
-    private void DrawAlignments(ref XML_Room data)
+    private void DrawAlignments(ref NLin_XML_Room data)
     {
-        XML_RoomAlignment alignment;
-        List<XML_RoomAlignment> alignmentsToRemove = new List<XML_RoomAlignment>();
+        NLin_XML_RoomAlignment alignment;
+        List<NLin_XML_RoomAlignment> alignmentsToRemove = new List<NLin_XML_RoomAlignment>();
         GUILayout.BeginVertical();
-        foreach (XML_RoomAlignment roomAlignment in data.roomAlignments)
+        foreach (NLin_XML_RoomAlignment roomAlignment in data.roomAlignments)
         {
             alignment = roomAlignment;
             bool remove;
@@ -240,7 +240,7 @@ public static class DrawRoom
 public class NLin_RoomEditor : ScriptableWizard
 {
     public string roomName = NLin_RoomEditorWindow.selectedForEdit.name;
-    public RoomTypeEnum roomType = NLin_RoomEditorWindow.selectedForEdit.roomType;
+    public NLin_XML_RoomTypeEnum roomType = NLin_RoomEditorWindow.selectedForEdit.roomType;
 
     public static void CreateWizard()
     {

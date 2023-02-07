@@ -58,9 +58,11 @@
     <Analyzer Include="D:\Unity\2022.2.1f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\XML\NLin_XML_RoomAlignment.cs" />
     <Compile Include="Assets\Scripts\Editor\EditorGui\NLin_EdGuiDrawer_Alignment.cs" />
     <Compile Include="Assets\Scripts\Structures\Chapter.cs" />
     <Compile Include="Assets\Scripts\Alignment\Range.cs" />
+    <Compile Include="Assets\Scripts\XML\NLin_XML_RoomTree.cs" />
     <Compile Include="Assets\Scripts\Structures\Story.cs" />
     <Compile Include="Assets\Scripts\Alignment\Alignments.cs" />
     <Compile Include="Assets\Scripts\Objects\Prop.cs" />
@@ -69,6 +71,7 @@
     <Compile Include="Assets\Scripts\Math\N_Lin_Math.cs" />
     <Compile Include="Assets\Scripts\Structures\Biome.cs" />
     <Compile Include="Assets\Scripts\Alignment\AlignmentData.cs" />
+    <Compile Include="Assets\Scripts\XML\NLin_XML_Alignment.cs" />
     <Compile Include="Assets\Scripts\Alignment\RawAlignmentData.cs" />
     <Compile Include="Assets\Scripts\Editor\NLin_RoomEditorWindow.cs" />
     <Compile Include="Assets\Scripts\Alignment\PlayerAlignment.cs" />
@@ -76,10 +79,11 @@
     <Compile Include="Assets\Scripts\Editor\EditorGUIDrawer_Alignment.cs" />
     <Compile Include="Assets\Scripts\XML\NLin_XML_AlignmentTree.cs" />
     <Compile Include="Assets\Scripts\Alignment\RoomAlignments.cs" />
+    <Compile Include="Assets\Scripts\XML\NLin_XML_RoomTypeEnum.cs" />
     <Compile Include="Assets\Scripts\Editor\NLin_EditorHelper.cs" />
     <Compile Include="Assets\Scripts\Alignment\AlignmentType.cs" />
     <Compile Include="Assets\Scripts\XML\NLin_XMLSerialization.cs" />
-    <Compile Include="Assets\Scripts\XML\XML_Alignment.cs" />
+    <Compile Include="Assets\Scripts\XML\NLin_XML_Room.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\Scripts.asmdef" />

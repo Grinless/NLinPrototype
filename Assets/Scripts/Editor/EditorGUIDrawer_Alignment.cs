@@ -29,7 +29,7 @@ public static class EditorGUIDrawer_Alignment
     /// <param name="alignment"> A reference to the alignment to draw (required for setting data).</param>
     /// <param name="options"> The assignable alignment options.</param>
     /// <param name="removeAlignment"> Whether the user has indicated that the alignment should be removed.</param>
-    public static void Draw(ref XML_RoomAlignment alignment, string[] options, out bool removeAlignment)
+    public static void Draw(ref NLin_XML_RoomAlignment alignment, string[] options, out bool removeAlignment)
     {
         GUILayout.BeginHorizontal();
 
@@ -54,7 +54,7 @@ public static class EditorGUIDrawer_Alignment
         GUILayout.EndHorizontal();
     }
 
-    public static void Draw(ref XML_Alignment alignment, out bool remove)
+    public static void Draw(ref NLin_XML_Alignment alignment, out bool remove)
     {
         GUILayout.BeginHorizontal();
         
