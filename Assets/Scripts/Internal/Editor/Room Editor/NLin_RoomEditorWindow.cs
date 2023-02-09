@@ -219,7 +219,7 @@ public class NLin_RoomEditorWindow : EditorWindow
         {
             alignment = roomAlignment;
             bool remove;
-            EditorGUIDrawer_Alignment.Draw(ref alignment, alignmentOptions, out remove);
+            NLin_EGUIDrawer_Alignment.Draw(ref alignment, alignmentOptions, out remove);
             if (remove)
                 alignmentsToRemove.Add(alignment);
         }

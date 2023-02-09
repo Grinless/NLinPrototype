@@ -1,145 +1,131 @@
 <?xml version="1.0"?>
 <RoomData xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Rooms>
-    <XML_Room>
+    <NLin_XML_Room>
       <name>New room</name>
       <identifier>0</identifier>
       <roomAlignments>
-        <XML_RoomAlignment>
+        <NLin_XML_RoomAlignment>
           <identifier>0</identifier>
           <matchMin>0</matchMin>
           <matchMax>0</matchMax>
           <thresholdMin>0</thresholdMin>
           <thresholdMax>0</thresholdMax>
-        </XML_RoomAlignment>
-        <XML_RoomAlignment>
-          <identifier>1</identifier>
-          <matchMin>0</matchMin>
-          <matchMax>0</matchMax>
-          <thresholdMin>0</thresholdMin>
-          <thresholdMax>0</thresholdMax>
-        </XML_RoomAlignment>
-        <XML_RoomAlignment>
-          <identifier>2</identifier>
-          <matchMin>0</matchMin>
-          <matchMax>0</matchMax>
-          <thresholdMin>0</thresholdMin>
-          <thresholdMax>0</thresholdMax>
-        </XML_RoomAlignment>
-        <XML_RoomAlignment>
-          <identifier>3</identifier>
-          <matchMin>0</matchMin>
-          <matchMax>0</matchMax>
-          <thresholdMin>0</thresholdMin>
-          <thresholdMax>0</thresholdMax>
-        </XML_RoomAlignment>
+        </NLin_XML_RoomAlignment>
       </roomAlignments>
       <type>START_NODE</type>
-    </XML_Room>
-    <XML_Room>
+    </NLin_XML_Room>
+    <NLin_XML_Room>
       <name>New room</name>
       <identifier>1</identifier>
       <roomAlignments>
-        <XML_RoomAlignment>
+        <NLin_XML_RoomAlignment>
           <identifier>0</identifier>
           <matchMin>0</matchMin>
           <matchMax>0</matchMax>
           <thresholdMin>0</thresholdMin>
           <thresholdMax>0</thresholdMax>
-        </XML_RoomAlignment>
-        <XML_RoomAlignment>
+        </NLin_XML_RoomAlignment>
+        <NLin_XML_RoomAlignment>
           <identifier>1</identifier>
           <matchMin>0</matchMin>
           <matchMax>0</matchMax>
           <thresholdMin>0</thresholdMin>
           <thresholdMax>0</thresholdMax>
-        </XML_RoomAlignment>
-        <XML_RoomAlignment>
-          <identifier>2</identifier>
-          <matchMin>0</matchMin>
-          <matchMax>0</matchMax>
-          <thresholdMin>0</thresholdMin>
-          <thresholdMax>0</thresholdMax>
-        </XML_RoomAlignment>
-        <XML_RoomAlignment>
-          <identifier>3</identifier>
-          <matchMin>0</matchMin>
-          <matchMax>0</matchMax>
-          <thresholdMin>0</thresholdMin>
-          <thresholdMax>0</thresholdMax>
-        </XML_RoomAlignment>
+        </NLin_XML_RoomAlignment>
       </roomAlignments>
       <type>START_NODE</type>
-    </XML_Room>
-    <XML_Room>
+    </NLin_XML_Room>
+    <NLin_XML_Room>
       <name>New room</name>
       <identifier>2</identifier>
       <roomAlignments>
-        <XML_RoomAlignment>
+        <NLin_XML_RoomAlignment>
           <identifier>0</identifier>
           <matchMin>0</matchMin>
           <matchMax>0</matchMax>
           <thresholdMin>0</thresholdMin>
           <thresholdMax>0</thresholdMax>
-        </XML_RoomAlignment>
-        <XML_RoomAlignment>
+        </NLin_XML_RoomAlignment>
+        <NLin_XML_RoomAlignment>
           <identifier>1</identifier>
           <matchMin>0</matchMin>
           <matchMax>0</matchMax>
           <thresholdMin>0</thresholdMin>
           <thresholdMax>0</thresholdMax>
-        </XML_RoomAlignment>
-        <XML_RoomAlignment>
+        </NLin_XML_RoomAlignment>
+        <NLin_XML_RoomAlignment>
           <identifier>2</identifier>
           <matchMin>0</matchMin>
           <matchMax>0</matchMax>
           <thresholdMin>0</thresholdMin>
           <thresholdMax>0</thresholdMax>
-        </XML_RoomAlignment>
-        <XML_RoomAlignment>
-          <identifier>3</identifier>
-          <matchMin>0</matchMin>
-          <matchMax>0</matchMax>
-          <thresholdMin>0</thresholdMin>
-          <thresholdMax>0</thresholdMax>
-        </XML_RoomAlignment>
+        </NLin_XML_RoomAlignment>
       </roomAlignments>
-      <type>START_NODE</type>
-    </XML_Room>
-    <XML_Room>
+      <type>PASSAGE_NODE</type>
+    </NLin_XML_Room>
+    <NLin_XML_Room>
       <name>New room</name>
       <identifier>3</identifier>
       <roomAlignments>
-        <XML_RoomAlignment>
+        <NLin_XML_RoomAlignment>
           <identifier>0</identifier>
           <matchMin>0</matchMin>
           <matchMax>0</matchMax>
           <thresholdMin>0</thresholdMin>
           <thresholdMax>0</thresholdMax>
-        </XML_RoomAlignment>
-        <XML_RoomAlignment>
+        </NLin_XML_RoomAlignment>
+        <NLin_XML_RoomAlignment>
           <identifier>1</identifier>
           <matchMin>0</matchMin>
           <matchMax>0</matchMax>
           <thresholdMin>0</thresholdMin>
           <thresholdMax>0</thresholdMax>
-        </XML_RoomAlignment>
-        <XML_RoomAlignment>
+        </NLin_XML_RoomAlignment>
+      </roomAlignments>
+      <type>PASSAGE_NODE</type>
+    </NLin_XML_Room>
+    <NLin_XML_Room>
+      <name>New room</name>
+      <identifier>4</identifier>
+      <roomAlignments>
+        <NLin_XML_RoomAlignment>
+          <identifier>0</identifier>
+          <matchMin>0</matchMin>
+          <matchMax>0</matchMax>
+          <thresholdMin>0</thresholdMin>
+          <thresholdMax>0</thresholdMax>
+        </NLin_XML_RoomAlignment>
+      </roomAlignments>
+      <type>ENDING_NODE</type>
+    </NLin_XML_Room>
+    <NLin_XML_Room>
+      <name>New room</name>
+      <identifier>5</identifier>
+      <roomAlignments>
+        <NLin_XML_RoomAlignment>
+          <identifier>0</identifier>
+          <matchMin>0</matchMin>
+          <matchMax>0</matchMax>
+          <thresholdMin>0</thresholdMin>
+          <thresholdMax>0</thresholdMax>
+        </NLin_XML_RoomAlignment>
+        <NLin_XML_RoomAlignment>
+          <identifier>1</identifier>
+          <matchMin>0</matchMin>
+          <matchMax>0</matchMax>
+          <thresholdMin>0</thresholdMin>
+          <thresholdMax>0</thresholdMax>
+        </NLin_XML_RoomAlignment>
+        <NLin_XML_RoomAlignment>
           <identifier>2</identifier>
           <matchMin>0</matchMin>
           <matchMax>0</matchMax>
           <thresholdMin>0</thresholdMin>
           <thresholdMax>0</thresholdMax>
-        </XML_RoomAlignment>
-        <XML_RoomAlignment>
-          <identifier>3</identifier>
-          <matchMin>0</matchMin>
-          <matchMax>0</matchMax>
-          <thresholdMin>0</thresholdMin>
-          <thresholdMax>0</thresholdMax>
-        </XML_RoomAlignment>
+        </NLin_XML_RoomAlignment>
       </roomAlignments>
-      <type>START_NODE</type>
-    </XML_Room>
+      <type>ENDING_NODE</type>
+    </NLin_XML_Room>
   </Rooms>
 </RoomData>

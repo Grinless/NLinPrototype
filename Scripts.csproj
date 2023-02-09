@@ -58,37 +58,38 @@
     <Analyzer Include="D:\Unity\2022.2.1f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\XML\NLin_XML_RoomAlignment.cs" />
-    <Compile Include="Assets\Scripts\Editor\EditorGui\NLin_EdGuiDrawer_Alignment.cs" />
-    <Compile Include="Assets\Scripts\Structures\Chapter.cs" />
-    <Compile Include="Assets\Scripts\Alignment\Range.cs" />
-    <Compile Include="Assets\Scripts\XML\NLin_XML_RoomTree.cs" />
-    <Compile Include="Assets\Scripts\Structures\Story.cs" />
-    <Compile Include="Assets\Scripts\Alignment\Alignments.cs" />
-    <Compile Include="Assets\Scripts\Objects\Prop.cs" />
-    <Compile Include="Assets\Scripts\Editor\NLin_AlignmentsWindow.cs" />
-    <Compile Include="Assets\Scripts\Helpers\NLin_HelperFunctions.cs" />
-    <Compile Include="Assets\Scripts\Math\N_Lin_Math.cs" />
-    <Compile Include="Assets\Scripts\Structures\Biome.cs" />
-    <Compile Include="Assets\Scripts\Alignment\AlignmentData.cs" />
-    <Compile Include="Assets\Scripts\XML\NLin_XML_Alignment.cs" />
-    <Compile Include="Assets\Scripts\Alignment\RawAlignmentData.cs" />
-    <Compile Include="Assets\Scripts\Editor\NLin_RoomEditorWindow.cs" />
-    <Compile Include="Assets\Scripts\Alignment\PlayerAlignment.cs" />
-    <Compile Include="Assets\Scripts\ScriptableObjects\AlignmentScriptableObject.cs" />
-    <Compile Include="Assets\Scripts\Editor\EditorGUIDrawer_Alignment.cs" />
-    <Compile Include="Assets\Scripts\XML\NLin_XML_AlignmentTree.cs" />
-    <Compile Include="Assets\Scripts\Alignment\RoomAlignments.cs" />
-    <Compile Include="Assets\Scripts\XML\NLin_XML_RoomTypeEnum.cs" />
-    <Compile Include="Assets\Scripts\Editor\NLin_EditorHelper.cs" />
-    <Compile Include="Assets\Scripts\Alignment\AlignmentType.cs" />
-    <Compile Include="Assets\Scripts\XML\NLin_XMLSerialization.cs" />
-    <Compile Include="Assets\Scripts\XML\NLin_XML_Room.cs" />
+    <Compile Include="Assets\Scripts\Internal\XML\NLin_XML_AlignmentTree.cs" />
+    <Compile Include="Assets\Scripts\Internal\Editor\Prop Alignment Editor\NLin_PropEditorWindow.cs" />
+    <Compile Include="Assets\Scripts\Internal\Alignment\RoomAlignments.cs" />
+    <Compile Include="Assets\Scripts\Internal\Structures\Chapter.cs" />
+    <Compile Include="Assets\Scripts\Internal\Structures\Biome.cs" />
+    <Compile Include="Assets\Scripts\Internal\XML\NLin_XML_RoomTree.cs" />
+    <Compile Include="Assets\Scripts\Internal\Editor\Room Editor\NLin_RoomEditorWindow.cs" />
+    <Compile Include="Assets\Scripts\Internal\Structures\Story.cs" />
+    <Compile Include="Assets\Scripts\Internal\Alignment\Alignments.cs" />
+    <Compile Include="Assets\Scripts\Internal\Alignment\PlayerAlignment.cs" />
+    <Compile Include="Assets\Scripts\Internal\Helpers\NLin_HelperFunctions.cs" />
+    <Compile Include="Assets\Scripts\Internal\Alignment\AlignmentType.cs" />
+    <Compile Include="Assets\Scripts\Internal\XML\NLin_XML_RoomTypeEnum.cs" />
+    <Compile Include="Assets\Scripts\Internal\Objects\Prop.cs" />
+    <Compile Include="Assets\Scripts\Internal\XML\NLin_XMLSerialization.cs" />
+    <Compile Include="Assets\Scripts\Internal\Alignment\RawAlignmentData.cs" />
+    <Compile Include="Assets\Scripts\Internal\Editor\Helpers\NLin_EditorHelper.cs" />
+    <Compile Include="Assets\Scripts\Internal\ScriptableObjects\AlignmentScriptableObject.cs" />
+    <Compile Include="Assets\Scripts\Internal\Editor\Alignment Editor\NLin_AlignmentsWindow.cs" />
+    <Compile Include="Assets\Scripts\Internal\XML\NLin_XML_RoomAlignment.cs" />
+    <Compile Include="Assets\Scripts\Internal\XML\NLin_XML_Alignment.cs" />
+    <Compile Include="Assets\Scripts\Internal\Alignment\AlignmentData.cs" />
+    <Compile Include="Assets\Scripts\Internal\XML\NLin_XML_Room.cs" />
+    <Compile Include="Assets\Scripts\Internal\Editor\EditorGuiDrawers\NLin_EdGuiDrawer_Alignment.cs" />
+    <Compile Include="Assets\Scripts\Internal\Alignment\Range.cs" />
+    <Compile Include="Assets\Scripts\Components\NLinProp.cs" />
+    <Compile Include="Assets\Scripts\Internal\Math\N_Lin_Math.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\Scripts.asmdef" />
-    <None Include="Assets\Scripts\Editor\AlignmentsWindow.uss" />
-    <None Include="Assets\Scripts\Editor\AlignmentsWindow.uxml" />
+    <None Include="Assets\Scripts\Internal\Editor\AlignmentsWindow.uss" />
+    <None Include="Assets\Scripts\Internal\Editor\AlignmentsWindow.uxml" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

@@ -1,33 +1,26 @@
 <?xml version="1.0"?>
 <AlignmentTree xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Alignments>
-    <XML_Alignment>
+    <NLin_XML_Alignment>
       <name>a</name>
       <identifier>0</identifier>
       <initalValue>0</initalValue>
       <minimumCap>0</minimumCap>
       <maximumCap>0</maximumCap>
-    </XML_Alignment>
-    <XML_Alignment>
+    </NLin_XML_Alignment>
+    <NLin_XML_Alignment>
       <name>b</name>
       <identifier>1</identifier>
       <initalValue>0</initalValue>
       <minimumCap>0</minimumCap>
       <maximumCap>0</maximumCap>
-    </XML_Alignment>
-    <XML_Alignment>
+    </NLin_XML_Alignment>
+    <NLin_XML_Alignment>
       <name>c</name>
       <identifier>2</identifier>
       <initalValue>0</initalValue>
       <minimumCap>0</minimumCap>
       <maximumCap>0</maximumCap>
-    </XML_Alignment>
-    <XML_Alignment>
-      <name>d</name>
-      <identifier>3</identifier>
-      <initalValue>0</initalValue>
-      <minimumCap>0</minimumCap>
-      <maximumCap>0</maximumCap>
-    </XML_Alignment>
+    </NLin_XML_Alignment>
   </Alignments>
 </AlignmentTree>

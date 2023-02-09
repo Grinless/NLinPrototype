@@ -112,7 +112,7 @@ public class NLin_AlignmentsWindow : EditorWindow
         foreach (NLin_XML_Alignment alignments in Tree.alignments)
         {
             alignment = alignments;
-            EditorGUIDrawer_Alignment.Draw(ref alignment, out remove);
+            NLin_EGUIDrawer_Alignment.Draw(ref alignment, out remove);
             NLin_HelperFunctions.DrawUILine(Color.black);
             if (remove)
             {
@@ -125,11 +125,14 @@ public class NLin_AlignmentsWindow : EditorWindow
     }
     #endregion
 
-    public void NewData() => NLin_EditorHelper.NewAlignmentTree();
+    public void NewData() => 
+        NLin_EditorHelper.NewAlignmentTree();
 
-    public void LoadData() => NLin_XMLSerialization.Deserialize<NLin_XML_AlignmentTree>(XMLFileNames.alignmentTreeFilename);
+    public void LoadData() => 
+        NLin_XMLSerialization.Deserialize<NLin_XML_AlignmentTree>(XMLFileNames.alignmentTreeFilename);
 
-    public void SaveData() => NLin_EditorHelper.SaveAlignmentTree();
+    public void SaveData() => 
+        NLin_EditorHelper.SaveAlignmentTree();
 
     #region Draw Elements. 
 
