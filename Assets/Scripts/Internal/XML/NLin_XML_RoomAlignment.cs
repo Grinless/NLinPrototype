@@ -1,4 +1,5 @@
 ﻿using System.Xml.Serialization;
+
 /// <summary>
 /// Serializable data class for a room alignment. 
 /// </summary>
@@ -12,26 +13,14 @@ public class NLin_XML_RoomAlignment
     public int identifier;
 
     /// <summary>
-    /// The minium match condition. 
+    /// The minium match condition range. 
     /// </summary>
-    [XmlElement(ElementName = "matchMin")]
-    public float matchMin;
+    [XmlElement(ElementName = "matchRange")]
+    public NLin_XML_Range matchRange;
 
     /// <summary>
-    /// The maximum match condition. 
+    /// The minium match condition range. 
     /// </summary>
-    [XmlElement(ElementName = "matchMax")]
-    public float matchMax;
-
-    /// <summary>
-    /// The minimum match threshold condition. 
-    /// </summary>
-    [XmlElement(ElementName = "thresholdMin")]
-    public float thresholdMin;
-
-    /// <summary>
-    /// The maximum match threshold condition.  
-    /// </summary>
-    [XmlElement(ElementName = "thresholdMax")]
-    public float thresholdMax;
+    [XmlElement(ElementName = "thresholdRange")]
+    public NLin_XML_Range thresholdRange; 
 }

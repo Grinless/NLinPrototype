@@ -166,6 +166,7 @@ public class NLin_PropEditorWindow : EditorWindow
                 //Draw alignment name and identifier.
                 EditorGUILayout.LabelField("ID: " + alignment.identifier, GUILayout.Width(20));
                 alignment.identifier = EditorGUILayout.Popup("", alignment.identifier, options);
+                alignment.effectValue = EditorGUILayout.FloatField(alignment.effectValue);
                 EditorGUILayout.EndHorizontal();
             }
             EditorGUILayout.EndVertical();

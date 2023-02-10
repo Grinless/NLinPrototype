@@ -3,11 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Xml.Serialization;
 
-public class NLin_PropBase: MonoBehaviour
-{
-
-}
-
 [XmlRoot("PropDatabase")]
 public class NLin_XML_PropDatabase
 {
@@ -17,6 +12,9 @@ public class NLin_XML_PropDatabase
     [XmlArray("Props")]
     public List<NLin_XML_PropData> props; 
 
+    /// <summary>
+    /// Function used to add a new prop to the database. 
+    /// </summary>
     public void AddProp()
     {
         if(props == null)
@@ -54,15 +52,27 @@ public class NLin_XML_PropData
     [XmlArray("propAlignments")]
     public List<NLin_XML_PropAlignmentData> alignments;
 
+    /// <summary>
+    /// Flag representing whether prop identification data should be displayed. 
+    /// </summary>
     [System.NonSerialized]
     public bool displayPropIdData = false;
 
+    /// <summary>
+    /// Flag representing whether prop alignment data should be displayed. 
+    /// </summary>
     [System.NonSerialized]
     public bool displayAlignments = false;
 
+    /// <summary>
+    /// Flag representing whether prop should be removed. 
+    /// </summary>
     [System.NonSerialized]
     public bool remove = false;
 
+    /// <summary>
+    /// Function used to add a new alignment to selected prop.
+    /// </summary>
     public void AddAlignment()
     {
         if(alignments == null)

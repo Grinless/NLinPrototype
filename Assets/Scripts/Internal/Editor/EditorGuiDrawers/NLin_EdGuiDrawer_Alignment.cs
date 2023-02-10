@@ -52,6 +52,7 @@ public static class NLin_EGUIDrawer_Alignment
     /// <param name="removeAlignment"> Whether the user has indicated that the alignment should be removed.</param>
     public static void Draw(ref NLin_XML_RoomAlignment alignment, string[] options, out bool removeAlignment)
     {
+        NLin_XML_Range rangeRef = alignment.matchRange; 
         GUILayout.BeginHorizontal();
 
         //Draw Alignment Name and Identifier.
@@ -59,15 +60,10 @@ public static class NLin_EGUIDrawer_Alignment
         alignment.identifier = EditorGUILayout.Popup("", alignment.identifier, options, GUILayout.Width(GUI_ROOM_ALIGNMENT_IDENTIFIER));
         GUILayout.Space(GUI_ROOM_SPACE_1);
 
-        //Draw Alignment Match Values.
-        alignment.matchMin = EditorGUILayout.FloatField(alignment.matchMin, GUILayout.Width(GUI_ROOM_THRESHOLD_WIDTH));
-        alignment.matchMax = EditorGUILayout.FloatField(alignment.matchMax, GUILayout.Width(GUI_ROOM_THRESHOLD_WIDTH));
-        GUILayout.Space(GUI_ROOM_SPACE_2);
-
-        //Draw Alignment Threshold Values.
-        alignment.thresholdMin = EditorGUILayout.FloatField(alignment.thresholdMin, GUILayout.Width(GUI_ROOM_THRESHOLD_WIDTH));
-        alignment.thresholdMax = EditorGUILayout.FloatField(alignment.thresholdMax, GUILayout.Width(GUI_ROOM_THRESHOLD_WIDTH));
-        GUILayout.Space(GUI_ROOM_SPACE_3);
+        //Draw Alignment Match/Threshold Values.
+        NLin_EdGuiDrawer_Range.Draw(ref rangeRef, GUI_ROOM_THRESHOLD_WIDTH);
+        rangeRef = alignment.thresholdRange;
+        NLin_EdGuiDrawer_Range.Draw(ref rangeRef, GUI_ROOM_THRESHOLD_WIDTH);
 
         //Draw the alignment removal button. 
         removeAlignment = GUILayout.Button(GUI_REMOVEBUTTOM_TEXT, GUILayout.Width(GUI_REMOVEBUTTON_WIDTH));
@@ -82,6 +78,8 @@ public static class NLin_EGUIDrawer_Alignment
     /// <param name="remove"> Whether the user has opted to remove the alignment. </param>
     public static void Draw(ref NLin_XML_Alignment alignment, out bool remove)
     {
+        NLin_XML_Range rangeRef = alignment.range;
+
         GUILayout.BeginHorizontal();
 
         //Draw Alignment Name and Identifier. 
@@ -93,10 +91,8 @@ public static class NLin_EGUIDrawer_Alignment
         alignment.initalValue = EditorGUILayout.FloatField(alignment.initalValue, GUILayout.Width(GUI_ALIGNMENT_RANGE_WIDTH));
         GUILayout.Space(GUI_ALIGNMENT_SPACE2);
 
-        //Draw the min and max cap range. 
-        alignment.valueMinimumCap = EditorGUILayout.FloatField(alignment.valueMinimumCap, GUILayout.Width(GUI_ALIGNMENT_RANGE_WIDTH));
-        alignment.valueMaximumCap = EditorGUILayout.FloatField(alignment.valueMaximumCap, GUILayout.Width(GUI_ALIGNMENT_RANGE_WIDTH));
-        GUILayout.Space(GUI_ALIGNMENT_SPACE2);
+        //Draw the min and max cap range.
+        NLin_EdGuiDrawer_Range.Draw(ref rangeRef, GUI_ALIGNMENT_RANGE_WIDTH);
 
         //Draw the alignment removal button. 
         remove = GUILayout.Button(GUI_REMOVEBUTTOM_TEXT, GUILayout.Width(GUI_REMOVEBUTTON_WIDTH));

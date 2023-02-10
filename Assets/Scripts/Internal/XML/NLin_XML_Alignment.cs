@@ -25,14 +25,8 @@ public class NLin_XML_Alignment
     public float initalValue;
 
     /// <summary>
-    /// The minimum value the alignment can reach. 
+    /// The minimum/maximum value the alignment can reach. 
     /// </summary>
-    [XmlElement(ElementName = "minimumCap")]
-    public float valueMinimumCap;
-
-    /// <summary>
-    /// The maximum value the alignment can reach. 
-    /// </summary>
-    [XmlElement(ElementName = "maximumCap")]
-    public float valueMaximumCap;
+    [XmlElement(ElementName = "range")]
+    public NLin_XML_Range range;
 }

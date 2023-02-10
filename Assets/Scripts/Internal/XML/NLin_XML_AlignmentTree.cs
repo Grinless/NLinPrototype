@@ -26,7 +26,8 @@ public class NLin_XML_AlignmentTree
         {
             name = "New Alignment",
             identifier = GetNextIdentifier(),
-            initalValue = 0
+            initalValue = 0, 
+            range = new NLin_XML_Range() { min = -1, max = 1}
         });
     }
 

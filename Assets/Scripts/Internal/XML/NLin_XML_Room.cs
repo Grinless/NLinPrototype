@@ -44,7 +44,13 @@ public class NLin_XML_Room
         if (AlignmentsMaxed)
             return;
 
-        roomAlignments.Add(new NLin_XML_RoomAlignment() { identifier = nextID });
+        roomAlignments.Add(
+            new NLin_XML_RoomAlignment() { 
+                identifier = nextID, 
+                matchRange = new NLin_XML_Range() { max = 1, min = -1},
+                thresholdRange = new NLin_XML_Range() { max = 1, min = -1}
+            }
+            );
     }
 
     /// <summary>
