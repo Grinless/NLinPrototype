@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 
 /// <summary>
@@ -11,6 +6,7 @@ using UnityEngine;
 /// </summary>
 public static class NLin_HelperFunctions
 {
+
     /// <summary>
     /// Print the details of a chapter to Unity output editor. 
     /// </summary>

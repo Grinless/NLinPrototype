@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 /// </summary>
 public static class NLin_EditorHelper
 {
-    private static NLin_XML_AlignmentTree _alignmentsTree = null;
+    private static NLin_XML_AlignmentDefTree _alignmentsTree = null;
     private static NLin_XML_RoomTree _roomTree = null;
     private static NLin_XML_AlignmentDef _selectedAlignment = null;
     private static NLin_XML_Room _selectedRoomData = null;
@@ -22,13 +22,13 @@ public static class NLin_EditorHelper
 
     public static int AlignmentCap => CurrentAlignments.Length - 1;
 
-    public static NLin_XML_AlignmentTree AlignmentsTree
+    public static NLin_XML_AlignmentDefTree AlignmentsTree
     {
         get
         {
             if (_alignmentsTree == null)
             {
-                _alignmentsTree = NLin_XMLSerialization.Deserialize<NLin_XML_AlignmentTree>(XMLFileNames.alignmentTreeFilename);
+                _alignmentsTree = NLin_XMLSerialization.Deserialize<NLin_XML_AlignmentDefTree>(XMLFileNames.alignmentTreeFilename);
             }
 
             return _alignmentsTree;
@@ -79,9 +79,9 @@ public static class NLin_EditorHelper
         set { _selectedRoomData = value; }
     }
 
-    public static NLin_XML_AlignmentTree NewAlignmentTree()
+    public static NLin_XML_AlignmentDefTree NewAlignmentDefTree()
     {
-        _alignmentsTree = new NLin_XML_AlignmentTree();
+        _alignmentsTree = new NLin_XML_AlignmentDefTree();
         _alignmentsTree.AddAlignment();
         return _alignmentsTree;
     }
@@ -93,14 +93,14 @@ public static class NLin_EditorHelper
 
     public static void SaveAlignmentTree()
     {
-        NLin_XMLSerialization.Serialize<NLin_XML_AlignmentTree>(_alignmentsTree, XMLFileNames.alignmentTreeFilename);
+        NLin_XMLSerialization.Serialize<NLin_XML_AlignmentDefTree>(_alignmentsTree, XMLFileNames.alignmentTreeFilename);
         if (AlignmentsChanged != null)
         {
             AlignmentsChanged();
         }
     }
 
-    private static List<String> LoadAlignments()
+    private static List<string> LoadAlignments()
     {
         List<string> temp = new List<string>();
 

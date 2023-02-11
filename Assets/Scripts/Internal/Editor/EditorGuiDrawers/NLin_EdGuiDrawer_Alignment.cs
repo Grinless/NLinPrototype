@@ -18,8 +18,6 @@ public static class NLin_EGUIDrawer_Alignment
     private const int GUI_ROOM_ALIGNMENT_IDENTIFIER = 100;
     private const int GUI_ROOM_THRESHOLD_WIDTH = 60;
     private const int GUI_ROOM_SPACE_1 = 60;
-    private const int GUI_ROOM_SPACE_2 = 30;
-    private const int GUI_ROOM_SPACE_3 = 40;
 
     //General use data. 
     private const int GUI_REMOVEBUTTON_WIDTH = 120;
@@ -41,7 +39,6 @@ public static class NLin_EGUIDrawer_Alignment
 
         GUILayout.EndHorizontal(); 
     }
-
 
     /// <summary>
     /// Draws a room alignment in editor GUI. 

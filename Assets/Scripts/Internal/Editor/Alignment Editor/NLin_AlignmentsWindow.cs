@@ -10,13 +10,12 @@ using System;
 public class NLin_AlignmentsWindow : EditorWindow
 {
     [SerializeField]
-    private VisualTreeAsset m_VisualTreeAsset = default;
-    Rect headerSectionRect = new Rect() { x = 0, y = 0, width = Screen.width, height = 20 };
-    Rect displaySectionRect = new Rect() { x = 0, y = 20.1f, height = 500 };
-    Texture2D headerTexture;
-    Texture2D displayTexture;
+    private Rect headerSectionRect = new Rect() { x = 0, y = 0, width = Screen.width, height = 20 };
+    private Rect displaySectionRect = new Rect() { x = 0, y = 20.1f, height = 500 };
+    private Texture2D headerTexture;
+    private Texture2D displayTexture;
 
-    NLin_XML_AlignmentTree Tree => NLin_EditorHelper.AlignmentsTree;
+    private NLin_XML_AlignmentDefTree Tree => NLin_EditorHelper.AlignmentsTree;
     
     public static NLin_XML_AlignmentDef Selected
     {
@@ -126,10 +125,10 @@ public class NLin_AlignmentsWindow : EditorWindow
     #endregion
 
     public void NewData() => 
-        NLin_EditorHelper.NewAlignmentTree();
+        NLin_EditorHelper.NewAlignmentDefTree();
 
     public void LoadData() => 
-        NLin_XMLSerialization.Deserialize<NLin_XML_AlignmentTree>(XMLFileNames.alignmentTreeFilename);
+        NLin_XMLSerialization.Deserialize<NLin_XML_AlignmentDefTree>(XMLFileNames.alignmentTreeFilename);
 
     public void SaveData() => 
         NLin_EditorHelper.SaveAlignmentTree();

@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 /// Data class containing information on core alignment types. 
 /// </summary>
 [XmlRoot(ElementName = "AlignmentTree")]
-public class NLin_XML_AlignmentTree
+public class NLin_XML_AlignmentDefTree
 {
     /// <summary>
     /// The list of serializable alignment types. 
