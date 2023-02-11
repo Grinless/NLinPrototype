@@ -12,7 +12,7 @@ public static class NLin_EditorHelper
 {
     private static NLin_XML_AlignmentTree _alignmentsTree = null;
     private static NLin_XML_RoomTree _roomTree = null;
-    private static NLin_XML_Alignment _selectedAlignment = null;
+    private static NLin_XML_AlignmentDef _selectedAlignment = null;
     private static NLin_XML_Room _selectedRoomData = null;
     private static List<string> _alignmentTypes = null;
     private static string[] _roomTypes = null;
@@ -67,7 +67,7 @@ public static class NLin_EditorHelper
         }
     }
 
-    public static NLin_XML_Alignment SelectedAlignment
+    public static NLin_XML_AlignmentDef SelectedAlignment
     {
         get { return _selectedAlignment; }
         set { _selectedAlignment = value; }

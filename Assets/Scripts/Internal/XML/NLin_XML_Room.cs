@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Serialization;
+
 /// <summary>
 /// Serializable class for room data. 
 /// </summary>
@@ -22,7 +23,7 @@ public class NLin_XML_Room
     /// The list of alignments associated with the room. 
     /// </summary>
     [XmlArray(ElementName = "roomAlignments")]
-    public List<NLin_XML_RoomAlignment> roomAlignments = new List<NLin_XML_RoomAlignment>();
+    public List<NLin_XML_Alignment> roomAlignments = new List<NLin_XML_Alignment>();
 
     /// <summary>
     /// The room type. 
@@ -45,7 +46,7 @@ public class NLin_XML_Room
             return;
 
         roomAlignments.Add(
-            new NLin_XML_RoomAlignment() { 
+            new NLin_XML_Alignment() { 
                 identifier = nextID, 
                 matchRange = new NLin_XML_Range() { max = 1, min = -1},
                 thresholdRange = new NLin_XML_Range() { max = 1, min = -1}
@@ -62,7 +63,7 @@ public class NLin_XML_Room
         int lastID = -1; //This value should never be set, hence making it safe for comparison. 
 
         //Iterate over existing entry identifiers and increment by 1. 
-        foreach (NLin_XML_RoomAlignment item in roomAlignments)
+        foreach (NLin_XML_Alignment item in roomAlignments)
             if (lastID < item.identifier)
                 lastID = item.identifier;
         return lastID + 1;
@@ -83,8 +84,6 @@ public class NLin_XML_Room
 
     public bool CheckMissingIdentifier() =>
         (roomAlignments.Count < NLin_EditorHelper.AlignmentCap) ? true : false;
-
-
 
     /// <summary>
     /// Set a room type using a RoomType enum identifier integer.
@@ -113,11 +112,11 @@ public class NLin_XML_Room
     /// Remove a set of alignments from the room. 
     /// </summary>
     /// <param name="alignments"> The alignments to remove from the room. </param>
-    public void RemoveAlignments(List<NLin_XML_RoomAlignment> alignments)
+    public void RemoveAlignments(List<NLin_XML_Alignment> alignments)
     {
         lock (alignments)
         {
-            foreach (NLin_XML_RoomAlignment item in alignments)
+            foreach (NLin_XML_Alignment item in alignments)
             {
                 roomAlignments.Remove(item);
             }

@@ -139,7 +139,7 @@ public class NLin_RoomEditorWindow : EditorWindow
             selectedForEdit = data;
             if (data.roomAlignments == null)
             {
-                data.roomAlignments = new List<NLin_XML_RoomAlignment>();
+                data.roomAlignments = new List<NLin_XML_Alignment>();
                 data.AddAlignment();
             }
 
@@ -150,7 +150,7 @@ public class NLin_RoomEditorWindow : EditorWindow
         {
             if (data.roomAlignments == null)
             {
-                data.roomAlignments = new List<NLin_XML_RoomAlignment>();
+                data.roomAlignments = new List<NLin_XML_Alignment>();
             }
             data.AddAlignment();
         }
@@ -212,10 +212,10 @@ public class NLin_RoomEditorWindow : EditorWindow
     /// <param name="data">The XML RoomData</param>
     private void DrawAlignments(ref NLin_XML_Room data)
     {
-        NLin_XML_RoomAlignment alignment;
-        List<NLin_XML_RoomAlignment> alignmentsToRemove = new List<NLin_XML_RoomAlignment>();
+        NLin_XML_Alignment alignment;
+        List<NLin_XML_Alignment> alignmentsToRemove = new List<NLin_XML_Alignment>();
         GUILayout.BeginVertical();
-        foreach (NLin_XML_RoomAlignment roomAlignment in data.roomAlignments)
+        foreach (NLin_XML_Alignment roomAlignment in data.roomAlignments)
         {
             alignment = roomAlignment;
             bool remove;

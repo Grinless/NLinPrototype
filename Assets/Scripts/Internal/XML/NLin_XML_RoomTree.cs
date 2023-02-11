@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Serialization;
+
 /// <summary>
 /// Serializable data class for storing a searchable tree of room data classes. 
 /// </summary>

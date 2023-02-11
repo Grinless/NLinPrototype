@@ -63,6 +63,7 @@
     <Compile Include="Assets\Scripts\Internal\Alignment\RoomAlignments.cs" />
     <Compile Include="Assets\Scripts\Internal\Structures\Chapter.cs" />
     <Compile Include="Assets\Scripts\Internal\Structures\Biome.cs" />
+    <Compile Include="Assets\Scripts\Internal\XML\NLin_XML_Story.cs" />
     <Compile Include="Assets\Scripts\Internal\XML\NLin_XML_RoomTree.cs" />
     <Compile Include="Assets\Scripts\Internal\Editor\Room Editor\NLin_RoomEditorWindow.cs" />
     <Compile Include="Assets\Scripts\Internal\Structures\Story.cs" />
@@ -78,7 +79,8 @@
     <Compile Include="Assets\Scripts\Internal\Editor\Helpers\NLin_EditorHelper.cs" />
     <Compile Include="Assets\Scripts\Internal\Editor\Alignment Editor\NLin_AlignmentsWindow.cs" />
     <Compile Include="Assets\Scripts\Internal\Editor\EditorGuiDrawers\NLin_EdGuiDrawer_Range.cs" />
-    <Compile Include="Assets\Scripts\Internal\XML\NLin_XML_RoomAlignment.cs" />
+    <Compile Include="Assets\Scripts\Internal\XML\NLin_XML_Chapter.cs" />
+    <Compile Include="Assets\Scripts\Internal\XML\NLin_XML_AlignmentDef.cs" />
     <Compile Include="Assets\Scripts\Internal\XML\NLin_XML_Alignment.cs" />
     <Compile Include="Assets\Scripts\Internal\Alignment\AlignmentData.cs" />
     <Compile Include="Assets\Scripts\Internal\XML\NLin_XML_Room.cs" />

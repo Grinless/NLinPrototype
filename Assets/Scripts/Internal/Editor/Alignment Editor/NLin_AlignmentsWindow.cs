@@ -18,7 +18,7 @@ public class NLin_AlignmentsWindow : EditorWindow
 
     NLin_XML_AlignmentTree Tree => NLin_EditorHelper.AlignmentsTree;
     
-    public static NLin_XML_Alignment Selected
+    public static NLin_XML_AlignmentDef Selected
     {
         get { return NLin_EditorHelper.SelectedAlignment; }
         set { NLin_EditorHelper.SelectedAlignment = value; }
@@ -103,13 +103,13 @@ public class NLin_AlignmentsWindow : EditorWindow
     private void DrawAlignmentDisplay()
     {
         bool remove;
-        NLin_XML_Alignment alignment;
-        List<NLin_XML_Alignment> alignmentsToRemove = new List<NLin_XML_Alignment>();
+        NLin_XML_AlignmentDef alignment;
+        List<NLin_XML_AlignmentDef> alignmentsToRemove = new List<NLin_XML_AlignmentDef>();
         GUILayout.BeginArea(displaySectionRect);
         GUILayout.BeginVertical();
         DrawAlignmentHeader();
         NLin_HelperFunctions.DrawUILine(Color.black);
-        foreach (NLin_XML_Alignment alignments in Tree.alignments)
+        foreach (NLin_XML_AlignmentDef alignments in Tree.alignments)
         {
             alignment = alignments;
             NLin_EGUIDrawer_Alignment.Draw(ref alignment, out remove);

@@ -25,7 +25,7 @@ public static class NLin_EGUIDrawer_Alignment
     private const int GUI_REMOVEBUTTON_WIDTH = 120;
     private const string GUI_REMOVEBUTTOM_TEXT = "Remove Alignment";
 
-    public static void Draw(ref NLin_XML_PropAlignmentData data, string[] options, out bool removeAlignment)
+    public static void Draw(ref NLin_XML_PropAlignmentData data, string[] options, out bool remove)
     {
         GUILayout.BeginHorizontal();
 
@@ -37,36 +37,35 @@ public static class NLin_EGUIDrawer_Alignment
         data.effectValue = EditorGUILayout.FloatField(data.effectValue, GUILayout.Width(60));
 
         //Draw the alignment removal button. 
-        removeAlignment = GUILayout.Button(GUI_REMOVEBUTTOM_TEXT, GUILayout.Width(GUI_REMOVEBUTTON_WIDTH));
+        remove = GUILayout.Button(GUI_REMOVEBUTTOM_TEXT, GUILayout.Width(GUI_REMOVEBUTTON_WIDTH));
 
         GUILayout.EndHorizontal(); 
-
     }
 
 
     /// <summary>
     /// Draws a room alignment in editor GUI. 
     /// </summary>
-    /// <param name="alignment"> A reference to the alignment to draw (required for setting data).</param>
+    /// <param name="data"> A reference to the alignment to draw (required for setting data).</param>
     /// <param name="options"> The assignable alignment options.</param>
-    /// <param name="removeAlignment"> Whether the user has indicated that the alignment should be removed.</param>
-    public static void Draw(ref NLin_XML_RoomAlignment alignment, string[] options, out bool removeAlignment)
+    /// <param name="remove"> Whether the user has indicated that the alignment should be removed.</param>
+    public static void Draw(ref NLin_XML_Alignment data, string[] options, out bool remove)
     {
-        NLin_XML_Range rangeRef = alignment.matchRange; 
+        NLin_XML_Range rangeRef = data.matchRange; 
         GUILayout.BeginHorizontal();
 
         //Draw Alignment Name and Identifier.
-        NLin_HelperFunctions.DrawID(alignment.identifier, GUI_ROOM_ALIGNMENT_ID_LENGTH);
-        alignment.identifier = EditorGUILayout.Popup("", alignment.identifier, options, GUILayout.Width(GUI_ROOM_ALIGNMENT_IDENTIFIER));
+        NLin_HelperFunctions.DrawID(data.identifier, GUI_ROOM_ALIGNMENT_ID_LENGTH);
+        data.identifier = EditorGUILayout.Popup("", data.identifier, options, GUILayout.Width(GUI_ROOM_ALIGNMENT_IDENTIFIER));
         GUILayout.Space(GUI_ROOM_SPACE_1);
 
         //Draw Alignment Match/Threshold Values.
         NLin_EdGuiDrawer_Range.Draw(ref rangeRef, GUI_ROOM_THRESHOLD_WIDTH);
-        rangeRef = alignment.thresholdRange;
+        rangeRef = data.thresholdRange;
         NLin_EdGuiDrawer_Range.Draw(ref rangeRef, GUI_ROOM_THRESHOLD_WIDTH);
 
         //Draw the alignment removal button. 
-        removeAlignment = GUILayout.Button(GUI_REMOVEBUTTOM_TEXT, GUILayout.Width(GUI_REMOVEBUTTON_WIDTH));
+        remove = GUILayout.Button(GUI_REMOVEBUTTOM_TEXT, GUILayout.Width(GUI_REMOVEBUTTON_WIDTH));
 
         GUILayout.EndHorizontal();
     }
@@ -76,7 +75,7 @@ public static class NLin_EGUIDrawer_Alignment
     /// </summary>
     /// <param name="alignment"> The alignment to display. </param>
     /// <param name="remove"> Whether the user has opted to remove the alignment. </param>
-    public static void Draw(ref NLin_XML_Alignment alignment, out bool remove)
+    public static void Draw(ref NLin_XML_AlignmentDef alignment, out bool remove)
     {
         NLin_XML_Range rangeRef = alignment.range;
 
@@ -88,7 +87,7 @@ public static class NLin_EGUIDrawer_Alignment
 
         //Draw Alignment Value. 
         GUILayout.Space(GUI_ALIGNMENT_SPACE1);
-        alignment.initalValue = EditorGUILayout.FloatField(alignment.initalValue, GUILayout.Width(GUI_ALIGNMENT_RANGE_WIDTH));
+        alignment.value = EditorGUILayout.FloatField(alignment.value, GUILayout.Width(GUI_ALIGNMENT_RANGE_WIDTH));
         GUILayout.Space(GUI_ALIGNMENT_SPACE2);
 
         //Draw the min and max cap range.

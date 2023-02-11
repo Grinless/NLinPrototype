@@ -1,32 +1,25 @@
-﻿using System;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
+/// <summary>
+/// XML data class responsible for containing alignment data. 
+/// </summary>
 public class NLin_XML_Alignment
 {
     /// <summary>
-    /// The name of the alignment. 
-    /// </summary>
-    [XmlElement(ElementName = "name")]
-    public string name;
-
-    /// <summary>
-    /// The identifier assigned to the alignment. 
+    /// The identifier assigned to the room alignment. 
     /// </summary>
     [XmlElement(ElementName = "identifier")]
     public int identifier;
 
     /// <summary>
-    /// The inital starting value of the alignment. 
+    /// The minium match condition range. 
     /// </summary>
-    [XmlElement(ElementName = "initalValue")]
-    public float initalValue;
+    [XmlElement(ElementName = "matchRange")]
+    public NLin_XML_Range matchRange;
 
     /// <summary>
-    /// The minimum/maximum value the alignment can reach. 
+    /// The minium match condition range. 
     /// </summary>
-    [XmlElement(ElementName = "range")]
-    public NLin_XML_Range range;
+    [XmlElement(ElementName = "thresholdRange")]
+    public NLin_XML_Range thresholdRange;
 }
