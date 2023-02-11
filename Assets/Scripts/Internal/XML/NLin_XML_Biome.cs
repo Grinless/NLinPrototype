@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 /// Serializable class for room data. 
 /// </summary>
 [System.Serializable]
-public class NLin_XML_Room
+public class NLin_XML_Biome
 {
     /// <summary>
     /// The name of the room. 
@@ -29,9 +29,9 @@ public class NLin_XML_Room
     /// The room type. 
     /// </summary>
     [XmlElement(ElementName = "type")]
-    public NLin_XML_RoomTypeEnum roomType = NLin_XML_RoomTypeEnum.START_NODE;
+    public NLin_XML_NodeType roomType = NLin_XML_NodeType.START_NODE;
 
-    public bool AlignmentsMaxed => roomAlignments.Count > NLin_EditorHelper.AlignmentCap;
+    public bool AlignmentsMaxed => roomAlignments.Count > NLin_EditorManager.AlignmentDefCap;
 
     #region Data Editing. 
 
@@ -83,7 +83,7 @@ public class NLin_XML_Room
     }
 
     public bool CheckMissingIdentifier() =>
-        (roomAlignments.Count < NLin_EditorHelper.AlignmentCap) ? true : false;
+        (roomAlignments.Count < NLin_EditorManager.AlignmentDefCap) ? true : false;
 
     /// <summary>
     /// Set a room type using a RoomType enum identifier integer.
@@ -94,16 +94,16 @@ public class NLin_XML_Room
         switch (selection)
         {
             case 0:
-                roomType = NLin_XML_RoomTypeEnum.START_NODE;
+                roomType = NLin_XML_NodeType.START_NODE;
                 break;
             case 1:
-                roomType = NLin_XML_RoomTypeEnum.PASSAGE_NODE;
+                roomType = NLin_XML_NodeType.LINK_NODE;
                 break;
             case 2:
-                roomType = NLin_XML_RoomTypeEnum.ENDING_NODE;
+                roomType = NLin_XML_NodeType.END_NODE;
                 break;
             default:
-                roomType = NLin_XML_RoomTypeEnum.START_NODE;
+                roomType = NLin_XML_NodeType.START_NODE;
                 break;
         }
     }

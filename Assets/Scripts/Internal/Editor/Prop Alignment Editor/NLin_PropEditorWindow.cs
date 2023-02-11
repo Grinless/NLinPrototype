@@ -22,14 +22,14 @@ public class NLin_PropEditorWindow : EditorWindow
     private void OnEnable()
     {
         database = new NLin_XML_PropDatabase();
-        database.props = new List<NLin_XML_PropData>();
+        database.props = new List<NLin_XML_Prop>();
         database.AddProp();
     }
 
     private void OnFocus()
     {
         database = new NLin_XML_PropDatabase();
-        database.props = new List<NLin_XML_PropData>();
+        database.props = new List<NLin_XML_Prop>();
         database.AddProp();
     }
 
@@ -49,7 +49,7 @@ public class NLin_PropEditorWindow : EditorWindow
 
         if (createProp)
         {
-            database.props.Add(new NLin_XML_PropData());
+            database.props.Add(new NLin_XML_Prop());
         }
     }
 
@@ -58,14 +58,14 @@ public class NLin_PropEditorWindow : EditorWindow
     /// </summary>
     private void DrawDatabase()
     {
-        NLin_XML_PropData _dataSel;
+        NLin_XML_Prop _dataSel;
 
         //Draw the inital divider and title. 
         NLin_HelperFunctions.DrawUILine(Color.black);
         propScrollPos = GUILayout.BeginScrollView(propScrollPos);
 
         //For each item draw the data in the editor. 
-        foreach (NLin_XML_PropData item in database.props)
+        foreach (NLin_XML_Prop item in database.props)
         {
             _dataSel = item;
             DrawProp(ref _dataSel);
@@ -74,9 +74,9 @@ public class NLin_PropEditorWindow : EditorWindow
         GUILayout.EndScrollView();
     }
 
-    private void DrawProp(ref NLin_XML_PropData propData)
+    private void DrawProp(ref NLin_XML_Prop propData)
     {
-        NLin_XML_PropData _dataSel = propData;
+        NLin_XML_Prop _dataSel = propData;
 
         DrawPropHeader(ref _dataSel);
 
@@ -95,7 +95,7 @@ public class NLin_PropEditorWindow : EditorWindow
     /// Draw the header and header options for the prop. 
     /// </summary>
     /// <param name="data"> The data instance to draw. </param>
-    private void DrawPropHeader(ref NLin_XML_PropData data)
+    private void DrawPropHeader(ref NLin_XML_Prop data)
     {
         //Draw identification data. 
         GUILayout.BeginHorizontal();
@@ -112,7 +112,7 @@ public class NLin_PropEditorWindow : EditorWindow
     /// Function handling drawing data modification fields for prop identification.
     /// </summary>
     /// <param name="data"> The prop data instance to display/modify. </param>
-    private void DrawIdentificationEditing(ref NLin_XML_PropData data)
+    private void DrawIdentificationEditing(ref NLin_XML_Prop data)
     {
         if (data.displayPropIdData)
         {
@@ -128,7 +128,7 @@ public class NLin_PropEditorWindow : EditorWindow
         }
     }
 
-    private void DrawAlignmentsHeader(ref NLin_XML_PropData data)
+    private void DrawAlignmentsHeader(ref NLin_XML_Prop data)
     {
         bool addAlignment = false;
 
@@ -146,14 +146,14 @@ public class NLin_PropEditorWindow : EditorWindow
         GUILayout.EndVertical();
     }
 
-    private void DrawDescription(ref NLin_XML_PropData data)
+    private void DrawDescription(ref NLin_XML_Prop data)
     {
         data.description = EditorGUILayout.TextArea(data.description);
     }
 
-    private void DrawAlignments(ref NLin_XML_PropData data)
+    private void DrawAlignments(ref NLin_XML_Prop data)
     {
-        string[] options = NLin_EditorHelper.CurrentAlignments;
+        string[] options = NLin_EditorManager.AlignmentDefTreeSTRArray;
 
         if (data.alignments != null)
         {

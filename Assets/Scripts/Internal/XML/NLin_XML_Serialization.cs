@@ -20,8 +20,9 @@ public static class XMLFileNames
     public static string folderName = "/Alignments";
 }
 
-public static class NLin_XMLSerialization
+public static class NLin_XML_Serialization
 {
+
     /// <summary>
     /// The folder path for serialized data.  
     /// </summary>

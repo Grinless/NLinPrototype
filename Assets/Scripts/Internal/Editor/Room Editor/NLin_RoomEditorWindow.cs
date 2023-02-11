@@ -7,12 +7,12 @@ using System.Linq;
 
 public class NLin_RoomEditorWindow : EditorWindow
 {
-    NLin_XML_RoomTree rTree;
+    NLin_XML_BiomeTree rTree;
     NLin_XML_AlignmentDefTree aTree;
     string[] alignmentOptions;
     string[] roomTypeOptions;
     bool newTree, loadTree, saveTree, addRoom;
-    public static NLin_XML_Room selectedForEdit;
+    public static NLin_XML_Biome selectedForEdit;
 
     [MenuItem("NLin/Rooms/Room Editor")]
     public static void ShowEditor()
@@ -25,15 +25,15 @@ public class NLin_RoomEditorWindow : EditorWindow
 
     private void OnEnable()
     {
-        alignmentOptions = NLin_EditorHelper.CurrentAlignments;
-        roomTypeOptions = NLin_EditorHelper.CurrentRoomTypes;
+        alignmentOptions = NLin_EditorManager.AlignmentDefTreeSTRArray;
+        roomTypeOptions = NLin_EditorManager.CurrentNodeTypesSTRArray;
 
-        NLin_EditorHelper.AlignmentsChanged += OnAlignmentChange; 
+        NLin_EditorManager.AlignmentsChanged += OnAlignmentChange; 
     }
 
     private void OnDisable()
     {
-        NLin_EditorHelper.AlignmentsChanged -= OnAlignmentChange;
+        NLin_EditorManager.AlignmentsChanged -= OnAlignmentChange;
     }
 
     private void OnGUI()
@@ -48,8 +48,8 @@ public class NLin_RoomEditorWindow : EditorWindow
     private void OnAlignmentChange()
     {
         //Get the new data into the editor. 
-        alignmentOptions = NLin_EditorHelper.CurrentAlignments;
-        roomTypeOptions = NLin_EditorHelper.CurrentRoomTypes;
+        alignmentOptions = NLin_EditorManager.AlignmentDefTreeSTRArray;
+        roomTypeOptions = NLin_EditorManager.CurrentNodeTypesSTRArray;
     }
 
     #region Utility Checks. 
@@ -75,7 +75,7 @@ public class NLin_RoomEditorWindow : EditorWindow
 
     private void GUIDraw()
     {
-        NLin_XML_Room dataSel; //Reference container. 
+        NLin_XML_Biome dataSel; //Reference container. 
 
         //Draw the toolbar and handle results. 
         ToolbarDrawAndResolve();
@@ -85,7 +85,7 @@ public class NLin_RoomEditorWindow : EditorWindow
             return;
 
         //Else draw rooms. 
-        foreach (NLin_XML_Room item in rTree.rooms)
+        foreach (NLin_XML_Biome item in rTree.rooms)
         {
             dataSel = item;
             DrawRoom(ref dataSel);
@@ -109,15 +109,15 @@ public class NLin_RoomEditorWindow : EditorWindow
     {
         if (newTree)
         {
-            rTree = new NLin_XML_RoomTree();
+            rTree = new NLin_XML_BiomeTree();
             AddRoom();
         }
 
         if (loadTree)
-            rTree = NLin_XMLSerialization.Deserialize<NLin_XML_RoomTree>(XMLFileNames.roomTreeFilename);
+            rTree = NLin_XML_Serialization.Deserialize<NLin_XML_BiomeTree>(XMLFileNames.roomTreeFilename);
 
         if (saveTree)
-            NLin_XMLSerialization.Serialize<NLin_XML_RoomTree>(rTree, XMLFileNames.roomTreeFilename);
+            NLin_XML_Serialization.Serialize<NLin_XML_BiomeTree>(rTree, XMLFileNames.roomTreeFilename);
 
         if (addRoom)
             AddRoom();
@@ -127,7 +127,7 @@ public class NLin_RoomEditorWindow : EditorWindow
 
     #region Room Toolbar.
 
-    private void DrawAndResolveRoomToolbar(ref NLin_XML_Room data)
+    private void DrawAndResolveRoomToolbar(ref NLin_XML_Biome data)
     {
         GUILayout.BeginHorizontal();
         bool editRoom = GUILayout.Button("Edit Room.", new GUILayoutOption[] { GUILayout.Width(80) });
@@ -159,7 +159,7 @@ public class NLin_RoomEditorWindow : EditorWindow
     #endregion
 
     #region Draw Rooms
-    private void DrawRoom(ref NLin_XML_Room data)
+    private void DrawRoom(ref NLin_XML_Biome data)
     {
         //int selected = 0;
         EditorGUILayout.Separator();
@@ -210,7 +210,7 @@ public class NLin_RoomEditorWindow : EditorWindow
     /// Draw the list of alignments within a room. 
     /// </summary>
     /// <param name="data">The XML RoomData</param>
-    private void DrawAlignments(ref NLin_XML_Room data)
+    private void DrawAlignments(ref NLin_XML_Biome data)
     {
         NLin_XML_Alignment alignment;
         List<NLin_XML_Alignment> alignmentsToRemove = new List<NLin_XML_Alignment>();
@@ -232,15 +232,10 @@ public class NLin_RoomEditorWindow : EditorWindow
     #endregion
 }
 
-public static class DrawRoom
-{
-
-}
-
 public class NLin_RoomEditor : ScriptableWizard
 {
     public string roomName = NLin_RoomEditorWindow.selectedForEdit.name;
-    public NLin_XML_RoomTypeEnum roomType = NLin_RoomEditorWindow.selectedForEdit.roomType;
+    public NLin_XML_NodeType roomType = NLin_RoomEditorWindow.selectedForEdit.roomType;
 
     public static void CreateWizard()
     {

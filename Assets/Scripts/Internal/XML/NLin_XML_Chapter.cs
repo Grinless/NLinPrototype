@@ -23,18 +23,18 @@ public class NLin_XML_Chapter
     /// <summary>
     /// The type assigned to the chapter. 
     /// </summary>
-    [XmlElement("chapterType")]
-    public ChapterType chapterType;
+    [XmlElement("nodeType")]
+    public NLin_XML_NodeType nodeType;
     
     /// <summary>
     /// The rooms assigned within the chapter. 
     /// </summary>
     [XmlElement("rooms")]
-    public NLin_XML_RoomTree Rooms; 
+    public NLin_XML_BiomeTree biomes; 
     
     /// <summary>
     /// The list of alignments required to load the given chapter. 
     /// </summary>
     [XmlElement("alignmentList")]
-    public List<NLin_XML_Alignment> AlignmentList;
+    public NLin_XML_AlignmentTree alignmentTree;
 }

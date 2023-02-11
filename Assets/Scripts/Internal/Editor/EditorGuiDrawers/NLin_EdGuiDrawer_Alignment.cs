@@ -21,9 +21,15 @@ public static class NLin_EGUIDrawer_Alignment
 
     //General use data. 
     private const int GUI_REMOVEBUTTON_WIDTH = 120;
-    private const string GUI_REMOVEBUTTOM_TEXT = "Remove Alignment";
+    private const string GUI_REMOVEBUTTOM_TEXT = "Remove";
 
-    public static void Draw(ref NLin_XML_PropAlignmentData data, string[] options, out bool remove)
+    /// <summary>
+    /// Draw a prop alignment to the editor. 
+    /// </summary>
+    /// <param name="data"> The data to draw/modify. </param>
+    /// <param name="options"> The enumeration options to present. </param>
+    /// <param name="remove"> Flag denoting whether the alignment should be removed. </param>
+    public static void Draw(ref NLin_XML_AlignmentProp data, string[] options, out bool remove)
     {
         GUILayout.BeginHorizontal();
 

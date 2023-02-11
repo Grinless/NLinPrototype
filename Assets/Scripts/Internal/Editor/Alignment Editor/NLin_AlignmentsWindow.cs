@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System;
 
 /// <summary>
-/// Used to assist in the creation of alignments used by N_Lin. 
+/// Editor used to assist alignment creation in N_Lin. 
 /// </summary>
 public class NLin_AlignmentsWindow : EditorWindow
 {
@@ -15,13 +15,7 @@ public class NLin_AlignmentsWindow : EditorWindow
     private Texture2D headerTexture;
     private Texture2D displayTexture;
 
-    private NLin_XML_AlignmentDefTree Tree => NLin_EditorHelper.AlignmentsTree;
-    
-    public static NLin_XML_AlignmentDef Selected
-    {
-        get { return NLin_EditorHelper.SelectedAlignment; }
-        set { NLin_EditorHelper.SelectedAlignment = value; }
-    }
+    private NLin_XML_AlignmentDefTree Tree => NLin_EditorManager.AlignmentDefTree;
 
     [MenuItem("NLin/Alignments/AlignmentEditor")]
     public static void ShowWindow()
@@ -30,7 +24,7 @@ public class NLin_AlignmentsWindow : EditorWindow
         wnd.titleContent = new GUIContent("AlignmentsEditor");
     }
 
-    public void OnEnable()
+    private void OnEnable()
     {
         InitTextures();
     }
@@ -42,13 +36,13 @@ public class NLin_AlignmentsWindow : EditorWindow
         DrawAlignmentDisplay();
     }
 
-    public void InitTextures()
+    private void InitTextures()
     {
         InitHeaderTexture();
         InitDisplayTexture();
     }
 
-    public void DrawLayouts()
+    private void DrawLayouts()
     {
         headerSectionRect.width = Screen.width;
         GUI.DrawTexture(headerSectionRect, headerTexture);
@@ -80,7 +74,7 @@ public class NLin_AlignmentsWindow : EditorWindow
             SaveData();
 
         if (addAlignment)
-            NLin_EditorHelper.AddAlignment(); 
+            NLin_EditorManager.AddAlignmentDef(); 
 
         if (loadData)
             LoadData();
@@ -124,14 +118,14 @@ public class NLin_AlignmentsWindow : EditorWindow
     }
     #endregion
 
-    public void NewData() => 
-        NLin_EditorHelper.NewAlignmentDefTree();
+    private void NewData() => 
+        NLin_EditorManager.NewAlignmentDefTree();
 
-    public void LoadData() => 
-        NLin_XMLSerialization.Deserialize<NLin_XML_AlignmentDefTree>(XMLFileNames.alignmentTreeFilename);
+    private void LoadData() => 
+        NLin_XML_Serialization.Deserialize<NLin_XML_AlignmentDefTree>(XMLFileNames.alignmentTreeFilename);
 
-    public void SaveData() => 
-        NLin_EditorHelper.SaveAlignmentTree();
+    private void SaveData() => 
+        NLin_EditorManager.SaveAlignmentDefTree();
 
     #region Draw Elements. 
 

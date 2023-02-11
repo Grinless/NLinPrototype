@@ -3,9 +3,9 @@
 /// <summary>
 /// Enum used to specify the type of node a room utilizes. 
 /// </summary>
-public enum NLin_XML_RoomTypeEnum
+public enum NLin_XML_NodeType
 {
     START_NODE,
-    PASSAGE_NODE,
-    ENDING_NODE
+    LINK_NODE,
+    END_NODE
 }
